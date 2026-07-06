@@ -44,8 +44,6 @@ const { timeRemaining } = useCountdown('2027-08-21T12:30:00')
       <!-- STEP 1: SCHEDULING TIMELINE -->
       <ProgramTimeline />
 
-      <!-- STEP 2: STYLING ATTIRE DETAILS -->
-      <DressCode />
 
       <!-- STEP 3: SAVE TO SYSTEM DIARIES (Placed cleanly right before maps) -->
       <AddToCalendar />
