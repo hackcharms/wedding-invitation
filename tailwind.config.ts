@@ -4,38 +4,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        theme: {
-          // Dark Emerald Palettes
-          emerald: {
-            DEFAULT: '#021E17',
-            light: '#053629',
-            dark: '#01120E',
-          },
-          // Core Obsidian Deep Canvas
-          obsidian: {
-            DEFAULT: '#01140F',
-            pure: '#000A07',
-          },
-          // Premium Accents
-          gold: {
-            light: '#FFFDD0', 
-            DEFAULT: '#D4AF37', 
-            dark: '#AA771C', 
-          }
+        luxury: {
+          dark: '#060B09',       // Deepest obsidian-green backdrop
+          card: '#0B1310',       // Slightly lighter surface for cards
+          emerald: '#02241C',    // Rich middle ground tone
+          gold: '#D4AF37',       // Core bright metallic gold
+          bronze: '#AA771C',     // Warm dark gold shadow
+          cream: '#F3EAD3',      // Soft antique text white
         }
       },
       fontFamily: {
-        serif: ['Cinzel', 'Georgia', 'serif'],
-        sans: ['Montserrat', 'sans-serif'],
-        mono: ['Courier New', 'monospace']
+        serif: ['Cinzel', 'Playfair Display', 'Georgia', 'serif'],
+        sans: ['Montserrat', 'Inter', 'sans-serif'],
       },
       boxShadow: {
-        'luxury-glow': '0 0 30px rgba(212, 175, 55, 0.25)',
-        'shutter-depth': '0 0 50px rgba(0, 0, 0, 0.8)'
+        'premium': '0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+        'gold-glow': '0 0 25px rgba(212, 175, 55, 0.2)',
       }
     }
   },
   plugins: []
 }
-
 export default config

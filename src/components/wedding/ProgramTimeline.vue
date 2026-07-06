@@ -4,45 +4,63 @@ import type { TimelineEvent } from '@/types/wedding'
 
 const timelineEvents = ref<TimelineEvent[]>([
   {
-    time: '04:00 PM',
-    title: 'Barat & Guest Arrival',
-    description: "Welcoming the groom's procession and family.",
+    time: '4:00 PM',
+    title: 'Guest Arrival',
+    description: "Welcoming the groom's procession and extended family.",
     icon: '✨'
   },
   {
-    time: '05:00 PM',
-    title: 'Solemnization of Nikah',
-    description: 'The official marriage contract signing and blessings.',
+    time: '5:00 PM',
+    title: 'Wedding Ceremony',
+    description: 'The sacred and official marriage contract signing and blessings.',
     icon: '📖'
   },
   {
-    time: '07:30 PM',
-    title: 'Walima Dinner Reception',
-    description: 'A grand celebratory feast with family and loved ones.',
+    time: '7:00 PM',
+    title: 'Dinner Reception',
+    description: 'A grand celebratory feast to honor the newlywed couple.',
     icon: '🍽️'
   }
 ])
 </script>
 
 <template>
-  <section class="space-y-8 max-w-sm mx-auto w-full px-2">
-    <div class="flex items-center justify-center gap-2 text-luxury-gold">
-      <span class="text-xs">⏳</span>
-      <h3 class="font-sans text-xs tracking-[0.25em] uppercase">Program Timeline</h3>
+  <section class="max-w-xs mx-auto w-full px-2 space-y-8">
+    
+    <div class="flex flex-col items-center justify-center space-y-1">
+      <div class="text-luxury-gold text-lg">⏳</div>
+      <h3 class="font-serif text-[13px] tracking-[0.3em] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white to-luxury-cream">
+        Program Timeline
+      </h3>
+      <div class="w-16 h-[0.5px] bg-luxury-gold/30"></div>
     </div>
     
-    <div class="relative border-l border-luxury-gold/30 ml-4 pl-6 space-y-8 text-left">
-      <div v-for="(event, index) in timelineEvents" :key="index" class="relative group">
-        <span class="absolute -left-[31px] top-1 w-2.5 h-2.5 rounded-full bg-luxury-gold ring-4 ring-luxury-emerald transition-all duration-300 group-hover:scale-125 group-hover:bg-luxury-champagne group-hover:ring-luxury-gold/50"></span>
-        <div class="space-y-1 transition-transform duration-300 group-hover:translate-x-1">
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-xs text-luxury-gold font-medium tracking-wider">{{ event.time }}</span>
-            <span class="text-[10px] filter grayscale group-hover:grayscale-0 transition-all">{{ event.icon }}</span>
+    <div class="relative pl-8 space-y-6 text-left border-l-[0.75px] border-luxury-gold/40 ml-3">
+      
+      <div 
+        v-for="(event, index) in timelineEvents" 
+        :key="index" 
+        class="relative transition-all duration-300 hover:translate-x-0.5"
+      >
+        <span class="absolute -left-[36.5px] top-1 w-2.5 h-2.5 rounded-full bg-luxury-gold border-2 border-luxury-dark shadow-gold-glow"></span>
+        
+        <div class="space-y-0.5">
+          <div class="flex items-center gap-2 font-mono text-[11px] text-luxury-gold/90 font-medium">
+            <span>{{ event.time }}</span>
+            <span class="text-[10px] opacity-40">{{ event.icon }}</span>
           </div>
-          <h5 class="text-sm font-serif font-medium text-white tracking-wide">{{ event.title }}</h5>
-          <p class="text-xs text-gray-400 font-sans leading-relaxed">{{ event.description }}</p>
+          
+          <h4 class="text-sm font-serif font-semibold text-white tracking-wide">
+            {{ event.title }}
+          </h4>
+          
+          <p class="text-[11px] text-gray-400 font-sans leading-relaxed tracking-wide pr-2">
+            {{ event.description }}
+          </p>
         </div>
       </div>
+
     </div>
+
   </section>
 </template>
