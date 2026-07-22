@@ -1,0 +1,14 @@
+{
+    "groom": "Beta Ahmad",
+    "bride": "Alpha Gama",
+    "venue": "The Grand Ballroom, City Hotel",
+    "date": "2026-12-14",
+    "dateString": "December 14",
+    "time": "18:00 PM",
+    "scratchCard":{
+        "label":"Scratch to Reveal",
+        "date":"Saturday, Dec 14, 2026",
+        "time":"18:00 PM"
+    }
+
+}

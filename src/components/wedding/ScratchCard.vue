@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import confetti from 'canvas-confetti'
 import { useScratchCanvas } from '@/composables/useScratchCanvas'
+import Labels from '@/config/labels.json'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const containerRef = ref<HTMLElement | null>(null)
@@ -48,10 +49,10 @@ onMounted(() => {
 
         <div class="text-center space-y-2 z-10 select-none">
           <span class="font-sans text-[9px] tracking-[0.25em] text-luxury-gold uppercase px-3 py-0.5 border border-luxury-gold/30 rounded-full bg-luxury-dark/40">You're Invited</span>
-          <h4 class="text-2xl font-serif font-light text-luxury-cream tracking-wide pt-2">Saturday, Aug 21</h4>
-          <p class="font-mono text-xs text-luxury-gold tracking-widest">12:30 PM</p>
+          <h4 class="text-2xl font-serif font-light text-luxury-cream tracking-wide pt-2">{{ Labels.scratchCard.date }}</h4>
+          <p class="font-mono text-xs text-luxury-gold tracking-widest">{{ Labels.scratchCard.time }}</p>
           <div class="w-12 h-[1px] bg-luxury-gold/20 mx-auto my-1"></div>
-          <p class="text-[11px] font-sans text-gray-400 tracking-wide uppercase">Grand Palace Hall, Mumbai</p>
+          <p class="text-[11px] font-sans text-gray-400 tracking-wide uppercase">{{ Labels.venue }}</p>
         </div>
       </div>
 

@@ -5,15 +5,16 @@ import ScratchCard from '@/components/wedding/ScratchCard.vue'
 import CountdownTimer from '@/components/wedding/CountdownTimer.vue'
 import ProgramTimeline from '@/components/wedding/ProgramTimeline.vue'
 import AddToCalendar from '@/components/wedding/AddToCalendar.vue'
-import DressCode from '@/components/wedding/DressCode.vue'
 import RsvpForm from '@/components/wedding/RsvpForm.vue'
 import GoldDivider from '@/components/ui/GoldDivider.vue'
 import BackgroundMusic from '@/components/wedding/BackgroundMusic.vue'
+import InvitationHeader from '@/components/wedding/InvitationHeader.vue'
+import Labels from '@/config/labels.json'
 
 import { useCountdown } from '@/composables/useCountdown'
 
 const appUnlocked = ref(false)
-const { timeRemaining } = useCountdown('2027-08-21T12:30:00')
+const { timeRemaining } = useCountdown(Labels.date)
 </script>
 
 <template>
@@ -27,13 +28,14 @@ const { timeRemaining } = useCountdown('2027-08-21T12:30:00')
     <main v-if="appUnlocked" class="max-w-md mx-auto px-6 py-16 space-y-12 text-center relative z-10">
       
       <!-- HERO CONTENT HEADER -->
-      <header class="space-y-4 pt-4">
+      <!-- <header class="space-y-4 pt-4">
         <div class="text-luxury-gold text-xl tracking-widest filter drop-shadow">﷽</div>
         <h1 class="text-4xl font-serif font-light tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white to-luxury-gold py-2">
           Zain &amp; Aisha
         </h1>
         <p class="font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400">Request the honour of your presence</p>
-      </header>
+      </header> -->
+      <InvitationHeader />
 
       <GoldDivider />
 

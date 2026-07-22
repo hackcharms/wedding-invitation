@@ -5,7 +5,6 @@ const isPlaying = ref(false)
 let audio: HTMLAudioElement | null = null
 
 onMounted(() => {
-  // Replace with your preferred instrumental or soft background track audio URL
   audio = new Audio('src/assets/leberch-invitation-wedding-375839.mp3')
 //   audio = new Audio('https://audio.com/shamrez-i/audio/islamic-background-music-copyright-free-no-copyright-background-music-islamic-best-islamic-musi')
   audio.loop = true
