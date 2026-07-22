@@ -18,7 +18,7 @@ withDefaults(defineProps<Props>(), {
     :disabled="disabled"
     class="w-full py-2.5 px-4 font-sans text-xs font-semibold tracking-widest uppercase rounded transition-all duration-300 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
     :class="{
-      'bg-theme-gold text-theme-emerald hover:bg-theme-gold-light hover:text-black shadow-luxury-glow': variant === 'primary',
+      'bg-theme-gold text-theme-emerald hover:bg-theme-gold-light hover:opacity-70 shadow-luxury-glow hover:bg-luxury-gold': variant === 'primary',
       'bg-theme-emerald-light text-theme-gold-light hover:bg-theme-emerald border border-theme-gold/20': variant === 'secondary',
       'border border-theme-gold/40 text-theme-gold hover:bg-theme-gold hover:text-theme-emerald': variant === 'outline'
     }"

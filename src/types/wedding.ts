@@ -17,7 +17,7 @@ export interface RSVPPayload {
   name: string
   email: string
   attendance: 'accept' | 'decline' | ''
-  totalGuests: number
+  totalGuests: string
   dietaryPreference: 'veg' | 'non-veg' | 'both' | ''
   prayers: string
 }

@@ -38,18 +38,18 @@ import Labels from '@/config/labels.json'
       </p>
 
       <!-- FIXED NAMES (High contrast, crisp text, no dark overlay) -->
-      <div class="py-4 space-y-2">
-        <h1 class="text-4xl font-serif font-normal tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-luxury-cream to-luxury-gold drop-shadow-sm">
+      <div class="py-4 space-y-2 font-parisienne font-bold">
+        <h1 class="text-4xl tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-luxury-cream to-luxury-gold drop-shadow-sm">
           {{ Labels.groom }}
         </h1>
         
         <div class="flex items-center justify-center gap-3 my-1">
           <div class="h-[0.5px] w-10 bg-gradient-to-r from-transparent to-luxury-gold/40"></div>
-          <p class="font-serif italic text-luxury-gold/80 text-base">&amp;</p>
+          <p class="font-normal italic text-luxury-gold/80 text-base">&amp;</p>
           <div class="h-[0.5px] w-10 bg-gradient-to-l from-transparent to-luxury-gold/40"></div>
         </div>
         
-        <h1 class="text-4xl font-serif font-normal tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-luxury-cream to-luxury-gold drop-shadow-sm">
+        <h1 class="text-4xl tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-luxury-cream to-luxury-gold drop-shadow-sm">
           {{ Labels.bride }}
         </h1>
       </div>

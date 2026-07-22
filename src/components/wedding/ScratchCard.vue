@@ -58,7 +58,7 @@ onMounted(() => {
 
       <canvas 
         ref="canvasRef"
-        class="absolute inset-0 w-full h-full cursor-crosshair transition-opacity duration-700 ease-in-out touch-none z-20"
+        class="absolute inset-0 w-full h-full cursor-pointer transition-opacity duration-700 ease-in-out touch-none z-20"
         :class="{ 'opacity-0 pointer-events-none': isFullyRevealed }"
         @pointerdown="startScratching($event, canvasRef!)"
         @pointermove="scratch($event, canvasRef!)"

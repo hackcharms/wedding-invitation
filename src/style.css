@@ -1,1 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap');
 @import "tailwindcss";
+@theme {
+  --font-parisienne: "Parisienne", cursive;
+  --font-serif: "Cinzel", "Playfair Display", Georgia, serif;
+  --font-sans: "Montserrat", "Inter", sans-serif;
+
+  --color-luxury-dark: #060B09;
+  --color-luxury-card: #0B1310;
+  --color-luxury-emerald: #02241C;
+  --color-luxury-gold: #D4AF37;
+  --color-luxury-bronze: #AA771C;
+  --color-luxury-cream: #F3EAD3;
+
+  --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-gold-glow: 0 0 25px rgba(212, 175, 55, 0.2);
+}

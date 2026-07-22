@@ -30,10 +30,10 @@ const onChange = (event: Event) => {
       :value="modelValue"
       :required="required"
       @change="onChange"
-      class="w-full bg-theme-emerald border border-white/10 rounded px-3 py-2 text-white focus:outline-none focus:border-theme-gold transition-colors duration-200 appearance-none cursor-pointer"
+      class="w-full bg-theme-emerald border border-white/10 rounded px-3 py-2 gray-500 focus:outline-none focus:border-theme-gold transition-colors duration-200 appearance-none cursor-pointer"
     >
-      <option v-if="placeholder" value="" disabled selected>{{ placeholder }}</option>
-      <option v-for="opt in options" :key="opt.value" :value="opt.value">
+      <option v-if="placeholder" value="" disabled selected class="bg-neutral-900 text-white">{{ placeholder }}</option>
+      <option v-for="opt in options" :key="opt.value" :value="opt.value" class="bg-neutral-900 text-white">
         {{ opt.label }}
       </option>
     </select>

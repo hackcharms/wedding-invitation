@@ -9,7 +9,7 @@ const formData = reactive<RSVPPayload>({
   name: '',
   email: '',
   attendance: '',
-  totalGuests: 1,
+  totalGuests: '1',
   dietaryPreference: '',
   prayers: ''
 })
@@ -110,6 +110,12 @@ const processRSVP = (): void => {
         Submit Response
       </BaseButton>
     </form>
+            <p
+          class="pt-8 text-[9px] font-sans tracking-[0.2em] text-white uppercase"
+        >
+          We Can't Wait To Celebrate With You!
+        </p>
+
   </section>
 </template>
 
