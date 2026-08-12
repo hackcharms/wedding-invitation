@@ -2,13 +2,13 @@
 import InvitationLanding from '@/views/InvitationLanding.vue'
 import InvitationLandingScroll from '@/views/InvitationLandingScroll.vue'
 
-const isScrollIntroVariant = new URLSearchParams(window.location.search).get('variant') === 'scroll-intro'
+const isBasicVariant = new URLSearchParams(window.location.search).get('variant') === 'basic'
 </script>
 
 <template>
   <div class="w-full min-h-screen bg-theme-obsidian text-gray-200 antialiased selection:bg-theme-gold/30">
-    <InvitationLandingScroll v-if="isScrollIntroVariant" />
-    <InvitationLanding v-else />
+    <InvitationLanding v-if="isBasicVariant" />
+    <InvitationLandingScroll v-else/>
   </div>
 </template>
 

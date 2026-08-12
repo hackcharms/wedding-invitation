@@ -3,16 +3,6 @@ const config: Config = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      colors: {
-        luxury: {
-          dark: '#060B09',       // Deepest obsidian-green backdrop
-          card: '#0B1310',       // Slightly lighter surface for cards
-          emerald: '#02241C',    // Rich middle ground tone
-          gold: '#D4AF37',       // Core bright metallic gold
-          bronze: '#AA771C',     // Warm dark gold shadow
-          cream: '#F3EAD3',      // Soft antique text white
-        }
-      },
       fontFamily: {
         serif: ['Cinzel', 'Playfair Display', 'Georgia', 'serif'],
         sans: ['Montserrat', 'Inter', 'sans-serif'],
