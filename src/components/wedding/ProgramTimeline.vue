@@ -4,21 +4,21 @@ import type { TimelineEvent } from '@/types/wedding'
 
 const timelineEvents = ref<TimelineEvent[]>([
   {
-    time: '4:00 PM',
-    title: 'Guest Arrival',
-    description: "Welcoming the groom's procession and extended family.",
+    time: '6:30 PM',
+    title: 'Guest Arrival & Welcome',
+    description: 'A warm reception for family and friends as they gather in prayer and celebration.',
     icon: '✨'
   },
   {
-    time: '5:00 PM',
-    title: 'Wedding Ceremony',
-    description: 'The sacred and official marriage contract signing and blessings.',
-    icon: '📖'
+    time: '7:00 PM',
+    title: 'Walima Reception',
+    description: 'A blessed evening of dua, joy, and togetherness in honor of the newlyweds.',
+    icon: '🤲'
   },
   {
-    time: '7:00 PM',
-    title: 'Dinner Reception',
-    description: 'A grand celebratory feast to honor the newlywed couple.',
+    time: '8:15 PM',
+    title: 'Dinner & Festive Gathering',
+    description: 'A grand dinner and heartfelt moments shared with loved ones in celebration.',
     icon: '🍽️'
   }
 ])

@@ -6,20 +6,19 @@ import Labels from '@/config/labels.json'
 </script>
 
 <template>
-  <header class="w-full max-w-sm mx-auto rounded-2xl overflow-hidden bg-gradient-to-b from-[#02241C] via-[#011a14] to-luxury-dark border border-luxury-gold/30 shadow-2xl relative px-6 pt-24 pb-20 text-center">
+  <header class="w-full max-w-sm mx-auto overflow-hidden relative px-6 pt-24 pb-20 text-center">
     
     <!-- Procedural micro-patterning background -->
     <div class="absolute inset-0 opacity-[0.02] pointer-events-none ethnic-grid-mask"></div>
 
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-46 text-luxury-gold/25 pointer-events-none select-none">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-46 pointer-events-none select-none">
        <BackgroundPattern/>
     </div>
 
-    <!-- LANTERNS (Changed text-white to text-luxury-gold/40) -->
-    <div class="absolute top-0 left-6 w-6 text-luxury-gold/40 pointer-events-none select-none">
+    <div class="absolute top-0 left-6 w-6 pointer-events-none select-none">
       <EthnicOrnaments type="lantern" />
     </div>
-    <div class="absolute top-0 right-6 w-6 text-luxury-gold/40 pointer-events-none select-none">
+    <div class="absolute top-0 right-6 w-6 pointer-events-none select-none text-luxury-cream">
       <EthnicOrnaments type="lantern" />
     </div>
 

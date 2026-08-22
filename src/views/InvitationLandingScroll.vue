@@ -7,6 +7,7 @@ import CountdownTimer from "@/components/wedding/CountdownTimer.vue";
 import ProgramTimeline from "@/components/wedding/ProgramTimeline.vue";
 import AddToCalendar from "@/components/wedding/AddToCalendar.vue";
 import RsvpForm from "@/components/wedding/RsvpForm.vue";
+import ThankyouCard from "@/components/wedding/ThankyouCard.vue";
 import GoldDivider from "@/components/ui/GoldDivider.vue";
 import BackgroundMusic from "@/components/wedding/BackgroundMusic.vue";
 import InvitationHeader from "@/components/wedding/InvitationHeader.vue";
@@ -29,13 +30,10 @@ const { timeRemaining } = useCountdown(Labels.date);
 
     <main v-if="appUnlocked" class="w-full relative z-10 text-center">
       <IntroScrollSequence :panel-count="4">
-        <template #panel-1>
+        <template #panel-2>
           <InvitationHeader />
         </template>
-        <!-- <article class="intro-panel absolute inset-0 flex items-center justify-center p-8 text-center">
-          <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.08),rgba(6,19,15,0.2)_30%,rgba(6,19,15,0.9)_78%)]"></div>
-          <div class="intro-stage relative z-10 w-full max-w-[320px] space-y-5 px-2"> -->
-        <template #panel-2>
+        <template #panel-1>
           <p
             class="intro-kicker text-[10px] tracking-[0.32em] uppercase text-luxury-gold/80"
           >
@@ -97,12 +95,10 @@ const { timeRemaining } = useCountdown(Labels.date);
           <GoldDivider />
           <AddToCalendar />
         </template>
-        <!-- <template #panel-7>
-        </template> -->
-        <template #panel-8>
+        <template #panel-7>
           <ProgramTimeline />
         </template>
-        <template #panel-9>
+        <template #panel-8>
           <section class="space-y-4">
             <div class="flex flex-col items-center justify-center space-y-1">
               <div class="text-luxury-gold text-lg">📍</div>
@@ -112,39 +108,36 @@ const { timeRemaining } = useCountdown(Labels.date);
                 Venue
               </h3>
               <h4 class="text-sm font-serif text-white pt-1">
-                Grand Palace Hall
+                Green Lawn Wedding Hall
               </h4>
               <p
                 class="text-[10px] font-sans tracking-wider text-gray-400 uppercase"
               >
-                Gokuldham, Mumbai
+                Kalsekar, Mumbra, Thane, Maharashtra 400612
               </p>
             </div>
 
             <div
               class="w-full max-w-[300px] mx-auto aspect-video rounded-lg overflow-hidden border border-luxury-gold/20 shadow-premium relative"
             >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m4!2s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C+Maharashtra!5m2!1sen!2sin"
-                class="w-full h-full border-0 absolute inset-0 filter invert-[90%] hue-rotate-[150deg] saturate-[60%] contrast-[95%]"
-                allowfullscreen="false"
-                loading="lazy"
-              ></iframe>
+             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.841394113391!2d73.02792447525505!3d19.158418749379884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bf9ae5e1d6f9%3A0xe4fd6e9446ad12bf!2sGreen%20Lawn%20Wedding%20Hall%2C%20Kalsekar!5e0!3m2!1sen!2sin!4v1787377938629!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
 
             <div
               class="flex items-center justify-center gap-3 pt-1 text-[9px] font-sans tracking-widest uppercase"
             >
               <a
-                href="https://maps.google.com"
+                href="https://maps.app.goo.gl/jn8cZxcHry6RbfPH8"
                 target="_blank"
+                rel="noreferrer"
                 class="px-3 py-1.5 border border-luxury-gold/30 bg-luxury-card/30 rounded text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
               >
-                Google Maps
+                Open Map
               </a>
               <a
-                href="https://maps.apple.com"
+                href="https://maps.apple.com/?q=Green%20Lawn%20Wedding%20Hall%2C%20Kalsekar&ll=19.1584187,73.0279245"
                 target="_blank"
+                rel="noreferrer"
                 class="px-3 py-1.5 border border-luxury-gold/30 bg-luxury-card/30 rounded text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
               >
                 Apple Maps
@@ -152,6 +145,7 @@ const { timeRemaining } = useCountdown(Labels.date);
             </div>
           </section>
         </template>
+
       </IntroScrollSequence>
       <footer class="p-4 relative">
         <div class="absolute inset-0 pointer-events-none">
@@ -162,7 +156,10 @@ const { timeRemaining } = useCountdown(Labels.date);
             class="absolute inset-0 bg-[linear-gradient(0deg,rgba(5,14,11,0.3)_0%,rgba(4,10,8,0.75)_60%,rgba(4,10,8,0.94)_100%)]"
           ></div>
         </div>
-        <RsvpForm />
+        <div class="relative z-10">
+          <!-- <RsvpForm /> -->
+          <ThankyouCard />
+        </div>
       </footer>
       <!-- </div> -->
     </main>

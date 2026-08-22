@@ -5,7 +5,7 @@ const isPlaying = ref(false)
 let audio: HTMLAudioElement | null = null
 
 onMounted(() => {
-  audio = new Audio('src/assets/leberch-invitation-wedding-375839.mp3')
+  audio = new Audio('/wedding-invitation/leberch-invitation-wedding-375839.mp3')
 //   audio = new Audio('https://audio.com/shamrez-i/audio/islamic-background-music-copyright-free-no-copyright-background-music-islamic-best-islamic-musi')
   audio.loop = true
 })
