@@ -122,9 +122,9 @@ onBeforeUnmount(() => {
     </div>
     <article 
     v-for="(_, index) in Object.keys(slots).length" :key="index"
-    class="intro-panel absolute inset-0 flex items-center justify-center p-8 text-center">
+    class="intro-panel absolute inset-0 flex items-center justify-center px-4 text-center">
         <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.08),rgba(6,19,15,0.2)_30%,rgba(6,19,15,0.9)_78%)]"></div>
-        <div class="intro-stage relative z-10 w-full max-w-[320px] space-y-5 px-2">
+        <div class="intro-stage relative z-10 w-full space-y-5 h-full flex flex-col items-center justify-center">
                 <slot :name="`panel-${index + 1}`" />
         </div>
     </article>

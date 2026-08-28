@@ -51,7 +51,7 @@ const { timeRemaining } = useCountdown(Labels.date);
         </template>
         <!-- </article> -->
 
-        <template #panel-3>
+        <!-- <template #panel-3>
           <p
             class="intro-kicker text-[10px] tracking-[0.32em] uppercase text-luxury-gold/80"
           >
@@ -67,8 +67,8 @@ const { timeRemaining } = useCountdown(Labels.date);
           >
             Every scroll step frames the invitation like a cinematic reveal.
           </p>
-        </template>
-        <template #panel-4>
+        </template> -->
+        <!-- <template #panel-4>
           <p
             class="intro-kicker text-[10px] tracking-[0.32em] uppercase text-luxury-gold/80"
           >
@@ -85,39 +85,39 @@ const { timeRemaining } = useCountdown(Labels.date);
             Continue scrolling and the invitation card appears without
             interruption.
           </p>
-        </template>
-        <template #panel-5>
+        </template> -->
+        <template #panel-3>
           <ScratchCard />
         </template>
-        <template #panel-6>
+        <template #panel-4>
           <CountdownTimer :time-data="timeRemaining" />
           <GoldDivider />
           <AddToCalendar />
         </template>
-        <template #panel-7>
+        <template #panel-5>
           <ProgramTimeline />
         </template>
-        <template #panel-8>
+        <template #panel-6>
           <section class="space-y-4">
             <div class="flex flex-col items-center justify-center space-y-1">
               <div class="text-luxury-gold text-lg">📍</div>
               <h3
-                class="font-serif text-[13px] tracking-[0.3em] uppercase text-luxury-cream"
+                class="font-serif text-xl tracking-[0.3em] uppercase text-luxury-cream"
               >
                 Venue
               </h3>
-              <h4 class="text-sm font-serif text-white pt-1">
+              <h4 class="text-lg font-serif text-white pt-1">
                 Green Lawn Wedding Hall
               </h4>
               <p
-                class="text-[10px] font-sans tracking-wider text-gray-400 uppercase"
+                class="text-base font-sans tracking-wider text-gray-400 uppercase"
               >
                 Kalsekar, Mumbra, Thane, Maharashtra 400612
               </p>
             </div>
 
             <div
-              class="w-full max-w-[300px] mx-auto aspect-video rounded-lg overflow-hidden border border-luxury-gold/20 shadow-premium relative"
+              class="w-full max-w-xs mx-auto aspect-video rounded-lg overflow-hidden border border-luxury-gold/20 shadow-premium relative"
             >
              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.841394113391!2d73.02792447525505!3d19.158418749379884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bf9ae5e1d6f9%3A0xe4fd6e9446ad12bf!2sGreen%20Lawn%20Wedding%20Hall%2C%20Kalsekar!5e0!3m2!1sen!2sin!4v1787377938629!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
@@ -129,7 +129,7 @@ const { timeRemaining } = useCountdown(Labels.date);
                 href="https://maps.app.goo.gl/jn8cZxcHry6RbfPH8"
                 target="_blank"
                 rel="noreferrer"
-                class="px-3 py-1.5 border border-luxury-gold/30 bg-luxury-card/30 rounded text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
+                class="text-base px-3 py-1.5 border border-luxury-gold/30 bg-luxury-card/30 rounded text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
               >
                 Open Map
               </a>
@@ -137,14 +137,13 @@ const { timeRemaining } = useCountdown(Labels.date);
                 href="https://maps.apple.com/?q=Green%20Lawn%20Wedding%20Hall%2C%20Kalsekar&ll=19.1584187,73.0279245"
                 target="_blank"
                 rel="noreferrer"
-                class="px-3 py-1.5 border border-luxury-gold/30 bg-luxury-card/30 rounded text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
+                class="text-base px-3 py-1.5 border border-luxury-gold/30 bg-luxury-card/30 rounded text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
               >
                 Apple Maps
               </a>
             </div>
           </section>
         </template>
-
       </IntroScrollSequence>
       <footer class="p-4 relative">
         <div class="absolute inset-0 pointer-events-none">

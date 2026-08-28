@@ -18,13 +18,13 @@ const icalUrl = generateIcalDataUrl(weddingEventData.value)
 <template>
   <div class="max-w-xs mx-auto w-full p-4 bg-luxury-card/40 border border-luxury-gold/10 rounded-xl space-y-4 text-center">
     <div class="space-y-1">
-      <span class="text-xs text-luxury-gold">📅</span>
-      <h4 class="font-serif text-xs tracking-[0.2em] uppercase text-white">Save The Celebration</h4>
-      <p class="text-[10px] text-gray-400 font-sans">Add our wedding timeline directly to your personal organizer.</p>
+      <span class="text-lg text-luxury-gold">📅</span>
+      <h4 class="font-serif text-lg tracking-[0.2em] uppercase text-white">Save The Celebration</h4>
+      <p class="text-base text-gray-400 font-sans">Add our wedding timeline directly to your personal organizer.</p>
     </div>
 
     <!-- Dual Action Platform Matrix Buttons -->
-    <div class="grid grid-cols-2 gap-2 pt-1 font-sans text-[10px] tracking-widest uppercase font-medium">
+    <div class="grid grid-cols-2 gap-2 pt-1 font-sans text-sm tracking-widest uppercase font-medium">
       
       <!-- Google Calendar Context -->
       <a 

@@ -6,7 +6,7 @@ const isBasicVariant = new URLSearchParams(window.location.search).get('variant'
 </script>
 
 <template>
-  <div class="w-full min-h-screen bg-theme-obsidian text-gray-200 antialiased selection:bg-theme-gold/30">
+  <div class="w-full min-h-dvh bg-theme-obsidian text-gray-200 antialiased selection:bg-theme-gold/30">
     <InvitationLanding v-if="isBasicVariant" />
     <InvitationLandingScroll v-else/>
   </div>

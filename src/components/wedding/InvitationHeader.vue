@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import EthnicOrnaments from '@/components/ui/EthnicOrnaments.vue'
+import Lantern from '@/components/ui/Lantern.vue'
 import Bismillah from '@/components/ui/Bismillah.vue'
 import BackgroundPattern from '../ui/BackgroundPattern.vue';
 import Labels from '@/config/labels.json'
 </script>
 
 <template>
-  <header class="w-full max-w-sm mx-auto overflow-hidden relative px-6 pt-24 pb-20 text-center">
+  <header class="w-full h-full mx-auto overflow-hidden relative text-center flex flex-col items-center justify-center">
     
-    <!-- Procedural micro-patterning background -->
-    <div class="absolute inset-0 opacity-[0.02] pointer-events-none ethnic-grid-mask"></div>
-
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-46 pointer-events-none select-none">
-       <BackgroundPattern/>
-    </div>
-
-    <div class="absolute top-0 left-6 w-6 pointer-events-none select-none">
-      <EthnicOrnaments type="lantern" />
-    </div>
-    <div class="absolute top-0 right-6 w-6 pointer-events-none select-none text-luxury-cream">
-      <EthnicOrnaments type="lantern" />
+    <div class="h-32 relative w-full flex justify-between items-start">
+      <!-- Procedural micro-patterning background -->
+      <div class="absolute inset-0 opacity-[0.02] pointer-events-none ethnic-grid-mask"></div>
+      <!-- <div class="w-8 pointer-events-none select-none"> -->
+        <Lantern class="w-14 h-36 text-luxury-cream" />
+      <!-- </div> -->
+      <div class="w-64 pointer-events-none select-none">
+         <BackgroundPattern/>
+      </div>
+      <!-- <div class="w-8 pointer-events-none select-none text-luxury-cream"> -->
+        <Lantern class="w-12 h-36 text-luxury-cream" />
+      <!-- </div> -->
     </div>
 
     <!-- CENTRAL CONTENT -->
-    <div class="relative z-10 space-y-6 mt-4">
+    <div class="relative z-10 gap-5 mt-4 grow flex flex-col items-cente justify-center-safe">
       <!-- Bismillah (Ensured warm tint) -->
       <div class="flex justify-center items-center text-luxury-gold select-none mt-4">
-          <Bismillah class="w-24 h-auto mx-auto" />
+          <Bismillah class="w-52 h-auto mx-auto" />
       </div>
 
       <!-- Invitation text with clean hierarchy -->
@@ -38,17 +38,17 @@ import Labels from '@/config/labels.json'
 
       <!-- FIXED NAMES (High contrast, crisp text, no dark overlay) -->
       <div class="py-4 space-y-2 font-parisienne font-bold">
-        <h1 class="text-4xl tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-luxury-cream to-luxury-gold drop-shadow-sm">
+        <h1 class="text-4xl tracking-wide text-transparent bg-clip-text bg-linear-to-b from-white via-luxury-cream to-luxury-gold drop-shadow-sm">
           {{ Labels.groom }}
         </h1>
         
         <div class="flex items-center justify-center gap-3 my-1">
-          <div class="h-[0.5px] w-10 bg-gradient-to-r from-transparent to-luxury-gold/40"></div>
+          <div class="h-[0.5px] w-10 bg-linear-to-r from-transparent to-luxury-gold/40"></div>
           <p class="font-normal italic text-luxury-gold/80 text-base">&amp;</p>
-          <div class="h-[0.5px] w-10 bg-gradient-to-l from-transparent to-luxury-gold/40"></div>
+          <div class="h-[0.5px] w-10 bg-linear-to-l from-transparent to-luxury-gold/40"></div>
         </div>
         
-        <h1 class="text-4xl tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-luxury-cream to-luxury-gold drop-shadow-sm">
+        <h1 class="text-4xl tracking-wide text-transparent bg-clip-text bg-linear-to-b from-white via-luxury-cream to-luxury-gold drop-shadow-sm">
           {{ Labels.bride }}
         </h1>
       </div>
