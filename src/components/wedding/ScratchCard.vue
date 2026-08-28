@@ -37,22 +37,23 @@ onMounted(() => {
 
 <template>
   <div class="w-full flex flex-col items-center space-y-4">
-    <span class="font-sans text-[10px] tracking-[0.3em] uppercase text-luxury-gold/70">Interactive Invitation Pass</span>
+    <span class="font-sans text-lg tracking-[0.3em] uppercase text-luxury-gold/70">Interactive Invitation Pass</span>
 
     <div 
       ref="containerRef"
-      class="relative w-full max-w-[340px] aspect-[4/3] bg-luxury-card rounded-lg overflow-hidden shadow-premium p-1"
+      class="relative w-full max-w-85 aspect-4/3 bg-luxury-card rounded-lg overflow-hidden shadow-premium p-1"
     >
       <div class="w-full h-full border border-luxury-gold/20 rounded-md p-6 flex flex-col justify-center items-center relative">
         
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-luxury-emerald/20 via-transparent to-transparent pointer-events-none"></div>
 
         <div class="text-center space-y-2 z-10 select-none">
-          <span class="font-sans text-[9px] tracking-[0.25em] text-luxury-gold uppercase px-3 py-0.5 border border-luxury-gold/30 rounded-full bg-luxury-dark/40">You're Invited</span>
+          <span class="font-sans text-sm tracking-[0.25em] text-luxury-gold uppercase px-3 py-0.5 border border-luxury-gold/30 rounded-full bg-luxury-dark/40">You're Invited</span>
           <h4 class="text-2xl font-serif font-light text-luxury-cream tracking-wide pt-2">{{ Labels.scratchCard.date }}</h4>
-          <p class="font-mono text-xs text-luxury-gold tracking-widest">{{ Labels.scratchCard.time }}</p>
-          <div class="w-12 h-[1px] bg-luxury-gold/20 mx-auto my-1"></div>
-          <p class="text-[11px] font-sans text-gray-400 tracking-wide uppercase">{{ Labels.venue }}</p>
+          <p class="font-mono text-base text-luxury-gold tracking-widest">{{ Labels.scratchCard.time }}</p>
+          <div class="w-12 h-px bg-luxury-gold/20 mx-auto my-1"></div>
+          <p class="text-base font-sans text-gray-400 tracking-wide uppercase">{{ Labels.venueName }}</p>
+          <p class="text-sm font-sans text-gray-400 tracking-wide uppercase">{{ Labels.venueAddress }}</p>
         </div>
       </div>
 
@@ -67,7 +68,7 @@ onMounted(() => {
       ></canvas>
     </div>
 
-    <div class="text-[10px] font-sans text-gray-500 tracking-widest uppercase">
+    <div class="text-sm font-sans text-gray-500 tracking-widest uppercase">
       Scratch to reveal details • <span class="text-luxury-gold font-medium">{{ scratchPercentage }}%</span>
     </div>
   </div>

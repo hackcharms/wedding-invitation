@@ -28,7 +28,7 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
     ctx.fillRect(0, 0, canvasElement.width, canvasElement.height)
     
     ctx.fillStyle = '#111827'
-    ctx.font = 'bold 12px sans-serif'
+    ctx.font = 'bold 16px sans-serif'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText('✨ SCRATCH TO REVEAL DATE ✨', canvasElement.width / 2, canvasElement.height / 2)

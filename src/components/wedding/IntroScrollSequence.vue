@@ -2,6 +2,7 @@
 import { nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+// import ScrollToNext from './ScrollToNext.vue'
 
 const slots = useSlots()
 const props = withDefaults(defineProps<{}>(), {})
@@ -114,6 +115,7 @@ onBeforeUnmount(() => {
 
 <template>
   <section ref="introSequenceRef" class="relative h-screen overflow-hidden bg-[#06130f] touch-pan-y select-none">
+    <!-- <ScrollToNext /> -->
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute -top-16 -left-8 w-56 h-56 rounded-full bg-luxury-gold/20 blur-3xl"></div>
       <div class="absolute top-1/3 -right-20 w-80 h-80 rounded-full bg-luxury-emerald/35 blur-3xl"></div>

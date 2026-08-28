@@ -34,17 +34,17 @@ const { timeRemaining } = useCountdown(Labels.date);
         </template>
         <template #panel-1>
           <p
-            class="intro-kicker text-[10px] tracking-[0.32em] uppercase text-luxury-gold/80"
+            class="intro-kicker text-lg tracking-[0.32em] uppercase text-luxury-gold/80"
           >
             A Timeless Evening
           </p>
           <h2
-            class="intro-title font-serif text-[38px] leading-[1.08] text-luxury-cream mx-auto max-w-[280px]"
+            class="intro-title font-serif text-4xl leading-[1.08] text-luxury-cream mx-auto max-w-[280px]"
           >
             The Celebration Begins
           </h2>
           <p
-            class="intro-body text-[11px] font-sans tracking-[0.14em] uppercase text-gray-200 mx-auto max-w-[260px]"
+            class="intro-body text-sm font-sans tracking-[0.14em] uppercase text-gray-200 mx-auto max-w-[260px]"
           >
             Scroll gently to unveil each detail before your invitation opens.
           </p>
@@ -107,12 +107,12 @@ const { timeRemaining } = useCountdown(Labels.date);
                 Venue
               </h3>
               <h4 class="text-lg font-serif text-white pt-1">
-                Green Lawn Wedding Hall
+                {{ Labels.venueName }}
               </h4>
               <p
                 class="text-base font-sans tracking-wider text-gray-400 uppercase"
               >
-                Kalsekar, Mumbra, Thane, Maharashtra 400612
+                {{ Labels.venueAddress }}
               </p>
             </div>
 
