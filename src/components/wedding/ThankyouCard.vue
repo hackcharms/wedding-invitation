@@ -3,7 +3,7 @@ import Labels from '@/config/labels.json'
 </script>
 
 <template>
-  <section class="w-full max-w-sm mx-auto px-3 pb-10 pt-4">
+  <section class="w-full mx-auto px-3 pb-10 pt-4">
     <div class=" px-5 py-6 text-center shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-sm">
       <p class="text-xl font-sans tracking-[0.35em] uppercase text-luxury-gold/85">
         {{ Labels.closing.eyebrow }}
