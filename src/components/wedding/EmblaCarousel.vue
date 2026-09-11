@@ -6,7 +6,6 @@ import { type EmblaCarouselType } from 'embla-carousel'
 
 const slots = useSlots()
 const emblaViewportRef = ref<HTMLDivElement | null>(null)
-const emblaContainerRef = ref<HTMLDivElement | null>(null)
 let emblaMainApi: EmblaCarouselType | undefined
 
 const selectedIndex = ref<number>(0)
@@ -118,14 +117,13 @@ onBeforeUnmount(() => {
     >
       <!-- Embla Container - this holds all slides and moves -->
       <div
-        ref="emblaContainerRef"
         class="flex flex-col h-screen"
       >
         <!-- Panels/Slides -->
         <div
           v-for="(_, index) in panelCount"
           :key="index"
-          class="intro-panel flex-shrink-0 w-screen h-screen flex items-center justify-center px-4 relative transition-opacity duration-300"
+          class="intro-panel shrink-0 w-screen h-screen flex items-center justify-center px-4 relative transition-opacity duration-300"
           :style="{ opacity: panelOpacities[index] ?? 1 }"
         >
           <!-- Background decorations -->
