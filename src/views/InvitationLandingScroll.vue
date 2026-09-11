@@ -25,7 +25,7 @@ const { timeRemaining } = useCountdown(Labels.date);
 
     <ShutterReveal @unlocked="appUnlocked = true" />
 
-    <main v-if="appUnlocked" class="w-full relative z-10 text-center">
+    <main v-if="appUnlocked" class="invitation-shell w-full relative z-10 text-center">
       <EmblaCarousel>
         <template #panel-2>
           <InvitationHeader />
