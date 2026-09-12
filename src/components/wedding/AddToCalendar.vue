@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { generateGoogleCalendarUrl, generateIcalDataUrl, type CalendarEventData } from '@/utils/calendarGenerator'
-import Lables from '@/config/labels.json'
+import Labels from '@/config/labels.json'
 
 // Centralized Event Specifications
 const weddingEventData = ref<CalendarEventData>({
