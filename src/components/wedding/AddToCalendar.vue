@@ -5,7 +5,7 @@ import Lables from '@/config/labels.json'
 
 // Centralized Event Specifications
 const weddingEventData = ref<CalendarEventData>({
-  title: `${Labels.groom} & ${Labels.bride} - Wedding Ceremony & Reception',
+  title: `${Labels.groom} & ${Labels.bride} - Wedding Ceremony & Reception`,
   description: 'Join us as we celebrate our union. Please arrive early for the Guest Arrival at 6:00 PM.',
   location: `${Labels.venueName},${Labels.venueAddress}`,
   startDate: '20261214T180000', // Sept 14, 2026 at 18:00 (6 PM)
