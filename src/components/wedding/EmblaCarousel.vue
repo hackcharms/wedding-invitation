@@ -109,7 +109,7 @@ onBeforeUnmount(() => {
   <div class="relative h-screen w-screen overflow-hidden">
     <div
       ref="emblaViewportRef"
-      class="h-screen w-screen overflow-hidden bg-[radial-gradient(circle_at_50%_20%,rgba(20,38,33,0.8),rgba(6,11,9,1)_30%,rgba(3,8,7,1)_100%)]"
+        class="invitation-canvas h-screen w-screen overflow-hidden bg-[radial-gradient(circle_at_50%_20%,rgba(20,38,33,0.8),rgba(6,11,9,1)_30%,rgba(3,8,7,1)_100%)]"
     >
       <div class="flex h-screen flex-col">
         <div
@@ -126,8 +126,8 @@ onBeforeUnmount(() => {
           <div class="pointer-events-none absolute inset-0">
             <div class="absolute -left-10 -top-16 h-64 w-64 rounded-full bg-luxury-gold/12 blur-3xl"></div>
             <div class="absolute -right-20 top-1/3 h-80 w-80 rounded-full bg-luxury-emerald/30 blur-3xl"></div>
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(212,175,55,0.16),rgba(6,19,15,0.22)_30%,rgba(6,19,15,0.9)_74%)]"></div>
-            <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,14,11,0.12)_0%,rgba(4,10,8,0.7)_65%,rgba(4,10,8,0.94)_100%)]"></div>
+            <div class="invitation-overlay invitation-overlay-glow absolute inset-0"></div>
+            <div class="invitation-overlay invitation-overlay-shade absolute inset-0"></div>
           </div>
 
           <div class="intro-stage relative z-10 flex h-full w-full max-w-140 flex-col items-center justify-center space-y-5 text-center">

@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import InvitationLanding from '@/views/InvitationLandingScroll.vue'
+import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 
 </script>
 
 <template>
-  <div class="w-full min-h-dvh bg-theme-obsidian text-gray-200 antialiased selection:bg-theme-gold/30">
+  <div class="min-h-dvh w-full bg-luxury-dark text-luxury-cream antialiased selection:bg-luxury-gold/30">
+    <ThemeToggle />
     <InvitationLanding/>
   </div>
 </template>
 
 <style>
-/* Reset base document container directly */
 html, body {
-  background-color: #01140F; /* Fallback matching bg-theme-obsidian */
+  background-color: var(--color-luxury-dark);
   margin: 0;
   padding: 0;
 }

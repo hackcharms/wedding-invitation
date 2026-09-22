@@ -41,13 +41,13 @@ onMounted(() => {
 
     <div
       ref="containerRef"
-      class="relative w-full max-w-[340px] aspect-[4/3] overflow-hidden rounded-[26px] border border-luxury-gold/25 bg-[linear-gradient(180deg,rgba(15,26,23,0.98),rgba(8,18,16,0.95))] p-[1px] shadow-[0_18px_38px_rgba(0,0,0,0.28)]"
+      class="scratch-card relative w-full max-w-[360px] aspect-[4/3] overflow-hidden rounded-[26px] border border-luxury-gold/25 bg-[linear-gradient(180deg,rgba(15,26,23,0.98),rgba(8,18,16,0.95))] p-[1px] shadow-[0_18px_38px_rgba(0,0,0,0.28)]"
     >
-      <div class="relative flex h-full w-full flex-col items-center justify-center rounded-[25px] border border-luxury-gold/12 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.08),transparent_48%)] p-6 text-center">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.04),transparent_52%)] pointer-events-none"></div>
+      <div class="scratch-card-inner relative flex h-full w-full flex-col items-center justify-center rounded-[25px] border border-luxury-gold/12 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.08),transparent_48%)] p-6 text-center">
+        <div class="scratch-card-glow absolute inset-0 pointer-events-none"></div>
 
-        <div class="z-10 select-none space-y-3">
-          <span class="inline-flex items-center rounded-full border border-luxury-gold/25 bg-luxury-dark/35 px-3 py-1 font-sans text-[10px] tracking-[0.28em] uppercase text-luxury-gold">You’re Invited</span>
+        <div class="z-10 p-4 select-none space-y-3">
+          <span class="scratch-card-badge inline-flex items-center rounded-full border border-luxury-gold/25 bg-luxury-dark/35 px-3 py-1 font-sans text-[10px] tracking-[0.28em] uppercase text-luxury-gold">You’re Invited</span>
           <h4 class="pt-2 font-serif text-2xl font-light tracking-[0.08em] text-luxury-cream">{{ Labels.scratchCard.date }}</h4>
           <p class="font-mono text-base tracking-[0.25em] text-luxury-gold">{{ Labels.scratchCard.time }}</p>
           <div class="mx-auto my-1 h-px w-12 bg-gradient-to-r from-transparent via-luxury-gold to-transparent"></div>

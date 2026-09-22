@@ -12,6 +12,180 @@
   --color-luxury-bronze: #AA771C;
   --color-luxury-cream: #F3EAD3;
 
+  --color-theme-gold: var(--color-luxury-gold);
+  --color-theme-gold-light: #E7C75A;
+  --color-theme-emerald: var(--color-luxury-emerald);
+  --color-theme-emerald-light: #12382D;
+
   --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   --shadow-gold-glow: 0 0 25px rgba(212, 175, 55, 0.2);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --color-luxury-dark: #f5f1e8;
+  --color-luxury-card: #fffdf8;
+  --color-luxury-emerald: #e6efe8;
+  --color-luxury-gold: #7a5a0b;
+  --color-luxury-bronze: #704914;
+  --color-luxury-cream: #26322c;
+  --color-theme-gold-light: #a77c13;
+  --color-theme-emerald-light: #d8e7dc;
+  --shadow-premium: 0 16px 34px rgba(63, 52, 28, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-gold-glow: 0 0 25px rgba(122, 90, 11, 0.18);
+  color-scheme: light;
+}
+
+:root[data-theme='light'] {
+  .text-white {
+    color: #26322c;
+  }
+
+  .text-gray-200 {
+    color: #3f4a43;
+  }
+
+  .text-gray-400 {
+    color: #536158;
+  }
+
+  .text-gray-500 {
+    color: #657269;
+  }
+
+  [class~="border-white/10"] {
+    border-color: rgba(38, 50, 44, 0.18);
+  }
+
+  [class~="border-white/[0.04]"] {
+    border-color: rgba(38, 50, 44, 0.1);
+  }
+
+  [class~="border-white/20"] {
+    border-color: rgba(38, 50, 44, 0.2);
+  }
+
+  [class~="bg-white/[0.02]"] {
+    background-color: rgba(255, 255, 255, 0.58);
+  }
+
+  [class~="bg-white/[0.015]"] {
+    background-color: rgba(255, 255, 255, 0.46);
+  }
+
+  [class~="bg-luxury-dark/40"] {
+    background-color: rgba(245, 241, 232, 0.72);
+  }
+
+  [class~="bg-luxury-dark/90"] {
+    background-color: rgba(245, 241, 232, 0.94);
+  }
+
+  [class~="bg-luxury-card/30"] {
+    background-color: rgba(255, 253, 248, 0.78);
+  }
+
+  [class~="bg-luxury-card/40"] {
+    background-color: rgba(255, 253, 248, 0.84);
+  }
+
+  [class~="bg-luxury-card/90"] {
+    background-color: rgba(255, 253, 248, 0.96);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #657269;
+    opacity: 1;
+  }
+
+  option {
+    background-color: #fffdf8;
+    color: #26322c;
+  }
+
+  .invitation-canvas {
+    background: radial-gradient(circle at 50% 20%, rgba(255, 253, 248, 0.98), rgba(230, 239, 232, 0.96) 42%, rgba(214, 228, 218, 0.98) 100%);
+  }
+
+  .invitation-overlay-glow {
+    background: radial-gradient(circle at 50% 25%, rgba(167, 124, 19, 0.1), rgba(255, 253, 248, 0.04) 38%, rgba(255, 253, 248, 0) 74%);
+  }
+
+  .invitation-overlay-shade {
+    background: linear-gradient(180deg, rgba(255, 253, 248, 0.01) 0%, rgba(230, 239, 232, 0.04) 65%, rgba(214, 228, 218, 0.14) 100%);
+  }
+
+  .scratch-card {
+    background: linear-gradient(180deg, #dbe8de, #c8dbce);
+    box-shadow: 0 18px 38px rgba(63, 82, 68, 0.2);
+  }
+
+  .scratch-card-inner {
+    background: radial-gradient(circle at top, rgba(167, 124, 19, 0.12), transparent 48%), #fffdf8;
+  }
+
+  .scratch-card-glow {
+    background: radial-gradient(circle at center, rgba(167, 124, 19, 0.06), transparent 52%);
+  }
+
+  .scratch-card-badge {
+    background-color: rgba(255, 253, 248, 0.88);
+  }
+
+  .gate-viewport {
+    background: #f3f0e7;
+  }
+
+  .gate-viewport::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.42;
+    background:
+      linear-gradient(115deg, transparent 0 34%, rgba(122, 90, 11, 0.055) 34.1%, transparent 34.5%),
+      linear-gradient(65deg, transparent 0 66%, rgba(38, 50, 44, 0.045) 66.1%, transparent 66.5%),
+      repeating-linear-gradient(90deg, transparent 0 12rem, rgba(122, 90, 11, 0.035) 12.1rem 12.2rem, transparent 12.3rem 24rem);
+  }
+
+  .gate-backdrop {
+    background: radial-gradient(ellipse at center, rgba(255, 253, 248, 0.98) 0%, rgba(244, 240, 227, 0.94) 36%, rgba(212, 226, 216, 0.92) 100%);
+  }
+
+  .shutter-panel {
+    background: linear-gradient(90deg, #c6d9cb 0%, #e7eee5 22%, #f8f5ec 50%, #e0eade 78%, #bfd3c5 100%);
+    box-shadow: inset 0 0 70px rgba(63, 82, 68, 0.14), 0 0 40px rgba(63, 82, 68, 0.1);
+    border-color: rgba(122, 90, 11, 0.28);
+  }
+
+  .shutter-r {
+    background: linear-gradient(270deg, #c6d9cb 0%, #e7eee5 22%, #f8f5ec 50%, #e0eade 78%, #bfd3c5 100%);
+  }
+
+  .shutter-glow {
+    background: radial-gradient(circle at 70% 50%, rgba(167, 124, 19, 0.2), transparent 36%);
+  }
+
+  .center-glow {
+    background: radial-gradient(circle, rgba(167, 124, 19, 0.3), rgba(167, 124, 19, 0.1) 30%, transparent 72%);
+    box-shadow: 0 0 46px rgba(167, 124, 19, 0.24);
+  }
+
+  .lock-button {
+    background: radial-gradient(circle at 50% 30%, #fffdf8, #dceadf 68%);
+    color: #26322c;
+    box-shadow: 0 0 0 8px rgba(255, 253, 248, 0.5), 0 0 0 9px rgba(122, 90, 11, 0.3), 0 0 45px rgba(122, 90, 11, 0.24);
+  }
+
+  .lock-button .text-luxury-gold {
+    color: #7a5a0b;
+  }
+
+  .shimmer {
+    background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.38) 18%, rgba(167, 124, 19, 0.13) 35%, rgba(255, 255, 255, 0.24) 52%, transparent 70%);
+  }
 }
