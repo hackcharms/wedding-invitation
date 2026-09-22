@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import InvitationLanding from '@/views/InvitationLanding.vue'
-import InvitationLandingScroll from '@/views/InvitationLandingScroll.vue'
+import InvitationLanding from '@/views/InvitationLandingScroll.vue'
 
-const isBasicVariant = new URLSearchParams(window.location.search).get('variant') === 'basic'
 </script>
 
 <template>
   <div class="w-full min-h-dvh bg-theme-obsidian text-gray-200 antialiased selection:bg-theme-gold/30">
-    <InvitationLanding v-if="isBasicVariant" />
-    <InvitationLandingScroll v-else/>
+    <InvitationLanding/>
   </div>
 </template>
 
