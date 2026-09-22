@@ -6,6 +6,9 @@ import Labels from '@/config/labels.json'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const containerRef = ref<HTMLElement | null>(null)
+const emit = defineEmits<{
+  revealed: []
+}>()
 
 const runCelebration = () => {
   confetti({
@@ -14,6 +17,7 @@ const runCelebration = () => {
     origin: { y: 0.65 },
     colors: ['#D4AF37', '#F3EAD3', '#02241C']
   })
+  emit('revealed')
 }
 
 const {
@@ -60,10 +64,11 @@ onMounted(() => {
         ref="canvasRef"
         class="absolute inset-0 z-20 h-full w-full cursor-pointer touch-none transition-opacity duration-700 ease-in-out"
         :class="{ 'opacity-0 pointer-events-none': isFullyRevealed }"
-        @pointerdown="startScratching($event, canvasRef!)"
-        @pointermove="scratch($event, canvasRef!)"
-        @pointerup="stopScratching"
-        @pointerleave="stopScratching"
+        @pointerdown.prevent.stop="startScratching($event, canvasRef!)"
+        @pointermove.prevent.stop="scratch($event, canvasRef!)"
+        @pointerup.prevent.stop="stopScratching"
+        @pointerleave.prevent.stop="stopScratching"
+        @pointercancel.prevent.stop="stopScratching"
       ></canvas>
     </div>
 

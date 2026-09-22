@@ -16,6 +16,7 @@ import Labels from "@/config/labels.json";
 import { useCountdown } from "@/composables/useCountdown";
 
 const appUnlocked = ref(false);
+const scratchRevealed = ref(false);
 const { timeRemaining } = useCountdown(Labels.date);
 </script>
 
@@ -26,7 +27,7 @@ const { timeRemaining } = useCountdown(Labels.date);
     <EnvelopSutter @opening="appUnlocked = true" @unlocked="appUnlocked = true" />
 
     <main v-if="appUnlocked" class="invitation-shell w-full relative z-10 text-center">
-      <EmblaCarousel>
+      <EmblaCarousel :locked-panel-indices="scratchRevealed ? [] : [3, 4, 5, 6]">
         <template #panel-1>
           <div class="opening-panel w-full px-5 py-7">
             <p class="intro-kicker text-lg tracking-[0.32em] uppercase text-luxury-gold/80">
@@ -45,7 +46,7 @@ const { timeRemaining } = useCountdown(Labels.date);
           <InvitationHeader />
         </template>
         <template #panel-3>
-          <ScratchCard />
+          <ScratchCard @revealed="scratchRevealed = true" />
         </template>
         <template #panel-4>
           <CountdownTimer :time-data="timeRemaining" />

@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import { ref, useSlots, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, useSlots, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import { type EmblaCarouselType } from 'embla-carousel'
 
+const props = withDefaults(defineProps<{
+  lockedPanelIndices?: number[]
+}>(), {
+  lockedPanelIndices: () => []
+})
+
 const slots = useSlots()
 const emblaViewportRef = ref<HTMLDivElement | null>(null)
 let emblaMainApi: EmblaCarouselType | undefined
+let autoplayPlugin: ReturnType<typeof Autoplay> | undefined
 
 const selectedIndex = ref<number>(0)
 const scrollSnaps = ref<number[]>([])
@@ -21,6 +28,22 @@ const panelCount = computed(() => Object.keys(slots).length)
 const onSelect = (api: EmblaCarouselType) => {
   selectedIndex.value = api.selectedScrollSnap()
   updateOpacities()
+
+  if (props.lockedPanelIndices.length > 0) {
+    const firstLockedIndex = Math.min(...props.lockedPanelIndices)
+    if (selectedIndex.value >= firstLockedIndex) {
+      autoplayPlugin?.stop()
+      if (selectedIndex.value !== firstLockedIndex - 1) {
+        api.scrollTo(firstLockedIndex - 1)
+      }
+      return
+    }
+  }
+
+  const nextIndex = selectedIndex.value + 1
+  if (props.lockedPanelIndices.includes(nextIndex)) {
+    autoplayPlugin?.stop()
+  }
 }
 
 const updateOpacities = () => {
@@ -42,7 +65,9 @@ const updateOpacities = () => {
 }
 
 const scrollToPanel = (index: number) => {
-  if (emblaMainApi) {
+  autoplayPlugin?.stop()
+
+  if (emblaMainApi && !props.lockedPanelIndices.includes(index)) {
     emblaMainApi.scrollTo(index)
   }
 }
@@ -52,11 +77,14 @@ const handleWheel = (e: WheelEvent) => {
 
   if (!emblaMainApi) return
 
+  autoplayPlugin?.stop()
+
   const isScrollingDown = e.deltaY > 0
   const currentIndex = emblaMainApi.selectedScrollSnap()
 
   if (isScrollingDown && currentIndex < panelCount.value - 1) {
-    emblaMainApi.scrollNext()
+    const nextIndex = currentIndex + 1
+    if (!props.lockedPanelIndices.includes(nextIndex)) emblaMainApi.scrollNext()
   } else if (!isScrollingDown && currentIndex > 0) {
     emblaMainApi.scrollPrev()
   }
@@ -65,7 +93,7 @@ const handleWheel = (e: WheelEvent) => {
 onMounted(() => {
   if (!emblaViewportRef.value) return
 
-  const autoplayPlugin = Autoplay({
+  autoplayPlugin = Autoplay({
     delay: 5000,
     stopOnInteraction: true,
     stopOnLastSnap: true,
@@ -93,6 +121,15 @@ onMounted(() => {
     emblaViewportRef.value.addEventListener('wheel', handleWheel, { passive: false })
   }
 })
+
+watch(
+  () => props.lockedPanelIndices,
+  (lockedPanelIndices) => {
+    if (lockedPanelIndices.length === 0) {
+      autoplayPlugin?.play()
+    }
+  }
+)
 
 onBeforeUnmount(() => {
   if (emblaViewportRef.value) {
