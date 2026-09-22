@@ -7,7 +7,7 @@ const { isDark, toggleTheme } = useTheme()
 <template>
   <button
     type="button"
-    class="theme-toggle fixed right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-luxury-gold/40 bg-luxury-card/85 text-luxury-gold shadow-premium backdrop-blur-md transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-luxury-gold/60"
+    class="theme-toggle fixed right-2 top-2 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-luxury-gold/40 bg-luxury-card/85 text-luxury-gold shadow-premium backdrop-blur-md transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-luxury-gold/60"
     :aria-label="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
     :title="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
     @click="toggleTheme"

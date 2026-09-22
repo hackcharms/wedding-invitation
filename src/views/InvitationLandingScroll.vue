@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-import ShutterReveal from "@/components/wedding/ShutterReveal.vue";
+import EnvelopSutter from "@/components/wedding/EnvelopSutter.vue";
 import ScratchCard from "@/components/wedding/ScratchCard.vue";
 import CountdownTimer from "@/components/wedding/CountdownTimer.vue";
 import ProgramTimeline from "@/components/wedding/ProgramTimeline.vue";
@@ -23,15 +23,12 @@ const { timeRemaining } = useCountdown(Labels.date);
   <div class="min-h-screen bg-luxury-dark text-luxury-cream overflow-x-hidden relative">
     <BackgroundMusic v-if="appUnlocked" />
 
-    <ShutterReveal @unlocked="appUnlocked = true" />
+    <EnvelopSutter @opening="appUnlocked = true" @unlocked="appUnlocked = true" />
 
     <main v-if="appUnlocked" class="invitation-shell w-full relative z-10 text-center">
       <EmblaCarousel>
-        <template #panel-2>
-          <InvitationHeader />
-        </template>
         <template #panel-1>
-          <div class="w-full px-5 py-7">
+          <div class="opening-panel w-full px-5 py-7">
             <p class="intro-kicker text-lg tracking-[0.32em] uppercase text-luxury-gold/80">
               A Timeless Evening
             </p>
@@ -43,6 +40,9 @@ const { timeRemaining } = useCountdown(Labels.date);
               Scroll gently to unveil each detail before your invitation opens.
             </p>
           </div>
+        </template>
+        <template #panel-2>
+          <InvitationHeader />
         </template>
         <template #panel-3>
           <ScratchCard />

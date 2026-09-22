@@ -23,6 +23,11 @@
 
 :root {
   color-scheme: dark;
+
+  --envelope-edge-alpha: 65%;
+  --envelope-edge-highlight: 50%;
+  --envelope-seam-alpha: 78%;
+  --envelope-seam-highlight: 42%;
 }
 
 :root[data-theme='light'] {
@@ -36,6 +41,10 @@
   --color-theme-emerald-light: #d8e7dc;
   --shadow-premium: 0 16px 34px rgba(63, 52, 28, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   --shadow-gold-glow: 0 0 25px rgba(122, 90, 11, 0.18);
+  --envelope-edge-alpha: 24%;
+  --envelope-edge-highlight: 28%;
+  --envelope-seam-alpha: 48%;
+  --envelope-seam-highlight: 42%;
   color-scheme: light;
 }
 
@@ -156,6 +165,68 @@
     background: radial-gradient(ellipse at center, rgba(255, 253, 248, 0.98) 0%, rgba(244, 240, 227, 0.94) 36%, rgba(212, 226, 216, 0.92) 100%);
   }
 
+  .envelope-stage {
+    perspective: 1400px;
+  }
+
+  .envelope-body {
+    background: linear-gradient(145deg, rgba(246, 241, 226, 0.96), rgba(218, 229, 216, 0.98));
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  .envelope-body::before,
+  .envelope-body::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 43%;
+    background: linear-gradient(145deg, #f9f5e9, #dfeade);
+    border: 1px solid rgba(122, 90, 11, 0.14);
+    box-shadow: 0 12px 24px rgba(63, 82, 68, 0.1);
+  }
+
+  .envelope-body::before {
+    top: -20%;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background: linear-gradient(145deg, #fbf7eb, #e6ecdf);
+  }
+
+  .envelope-body::after {
+    bottom: -20%;
+    clip-path: polygon(0 100%, 100% 100%, 50% 0);
+    background: linear-gradient(35deg, #d9e5d8, #f5f1e5);
+  }
+
+  .envelope-flap {
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    isolation: isolate;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+
+  .envelope-flap-left {
+    margin-right: -1px;
+  }
+
+  .envelope-flap-right {
+    margin-left: -1px;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  }
+
+  .envelope-flap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.48;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 3.6rem, rgba(122, 90, 11, 0.035) 3.7rem 3.78rem, transparent 3.9rem 7.5rem),
+      radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.2), transparent 62%);
+    mix-blend-mode: multiply;
+  }
+
   .shutter-panel {
     background: linear-gradient(90deg, #c6d9cb 0%, #e7eee5 22%, #f8f5ec 50%, #e0eade 78%, #bfd3c5 100%);
     box-shadow: inset 0 0 70px rgba(63, 82, 68, 0.14), 0 0 40px rgba(63, 82, 68, 0.1);
@@ -164,6 +235,14 @@
 
   .shutter-r {
     background: linear-gradient(270deg, #c6d9cb 0%, #e7eee5 22%, #f8f5ec 50%, #e0eade 78%, #bfd3c5 100%);
+  }
+
+  .envelope-flap-left {
+    background: linear-gradient(145deg, #c1d6c7 0%, #e4ede3 55%, #b7cfbe 100%);
+  }
+
+  .envelope-flap-right {
+    background: linear-gradient(215deg, #c1d6c7 0%, #e4ede3 55%, #b7cfbe 100%);
   }
 
   .shutter-glow {
@@ -187,5 +266,39 @@
 
   .shimmer {
     background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.38) 18%, rgba(167, 124, 19, 0.13) 35%, rgba(255, 255, 255, 0.24) 52%, transparent 70%);
+  }
+
+  .envelope-gate {
+    background: #efe7d8;
+  }
+
+  .envelope-atmosphere {
+    background:
+      radial-gradient(circle at 50% 50%, rgba(183, 129, 35, 0.18), transparent 28%),
+      radial-gradient(circle at 50% 10%, rgba(255, 251, 238, 0.95), transparent 56%),
+      #dce8df;
+  }
+
+  .envelope-top-flap {
+    background: linear-gradient(154deg, #d6e3d5 0%, #f8f2e5 62%, #bdcfbf 100%);
+  }
+
+  .envelope-bottom-flap {
+    background: linear-gradient(28deg, #b9cfbe 0%, #e5eee2 55%, #c7d9c8 100%);
+  }
+
+  .envelope-left-flap,
+  .envelope-right-flap {
+    background: linear-gradient(110deg, #b4cdbc 0%, #e7eee3 52%, #c1d6c3 100%);
+  }
+
+  .envelope-seal-button {
+    background: radial-gradient(circle at 50% 30%, #fffdf8, #dceadf 70%, #b1cbb6);
+    color: #26322c;
+    box-shadow: 0 0 0 8px rgba(255, 253, 248, 0.55), 0 12px 34px rgba(63, 82, 68, 0.24), 0 0 36px rgba(167, 124, 19, 0.32);
+  }
+
+  .envelope-seal-ring {
+    border-color: rgba(38, 50, 44, 0.32);
   }
 }

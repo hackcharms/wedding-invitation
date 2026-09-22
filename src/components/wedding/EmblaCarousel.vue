@@ -10,7 +10,7 @@ let emblaMainApi: EmblaCarouselType | undefined
 
 const selectedIndex = ref<number>(0)
 const scrollSnaps = ref<number[]>([])
-const panelOpacities = ref<number[]>([])
+const panelOpacities = ref<number[]>([1])
 
 defineSlots<{
   [key: `panel-${number}`]: () => any
