@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import FlowerAccent from '@/components/ui/FlowerAccent.vue'
+import { flowerAssets } from '@/config/flowerAssets'
 import { ref, useSlots, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
@@ -167,6 +169,28 @@ onBeforeUnmount(() => {
             <div class="invitation-overlay invitation-overlay-shade absolute inset-0"></div>
           </div>
 
+          <div
+            class="botanical-frame pointer-events-none absolute inset-0 z-0 overflow-hidden text-luxury-gold"
+            :class="`botanical-layout-${index % 5}`"
+            :style="{ '--botanical-delay': `${index * -0.8}s` }"
+          >
+            <div class="botanical-spray-anchor botanical-spray-anchor--left">
+              <FlowerAccent
+                v-if="index % 3 === 0"
+                :src="flowerAssets[(index * 2) % flowerAssets.length]"
+                :tone="index % 3 === 0 ? 'gold' : index % 3 === 1 ? 'sage' : 'cream'"
+                class="h-full w-full"
+              />
+            </div>
+            <div class="botanical-spray-anchor botanical-spray-anchor--right">
+              <FlowerAccent
+                :src="flowerAssets[(index * 2 + 1) % flowerAssets.length]"
+                :tone="index % 3 === 0 ? 'cream' : index % 3 === 1 ? 'gold' : 'sage'"
+                class="h-full w-full"
+              />
+            </div>
+          </div>
+
           <div class="intro-stage relative z-10 flex h-full w-full max-w-140 flex-col items-center justify-center space-y-5 text-center">
             <slot :name="`panel-${index + 1}`" />
           </div>
@@ -204,6 +228,71 @@ onBeforeUnmount(() => {
   animation: fadeUp 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.botanical-spray-anchor {
+  position: absolute;
+  width: clamp(5rem, 9vw, 8rem);
+  height: clamp(8rem, 18vh, 13rem);
+  opacity: 0.42;
+  transform-origin: center;
+}
+
+.botanical-spray-anchor--left {
+  bottom: 14%;
+  left: 2rem;
+}
+
+.botanical-spray-anchor--right {
+  top: 14%;
+  right: 2rem;
+}
+
+.intro-panel.is-active .botanical-spray-anchor {
+  animation: botanicalDrift 8s ease-in-out infinite;
+  animation-delay: var(--botanical-delay, 0s);
+}
+
+.botanical-layout-1 .botanical-spray-anchor--left {
+  top: 14%;
+  bottom: auto;
+  transform: rotate(10deg);
+}
+
+.botanical-layout-1 .botanical-spray-anchor--right {
+  top: auto;
+  bottom: 14%;
+  transform: rotate(-8deg);
+}
+
+.botanical-layout-2 .botanical-spray-anchor--left {
+  bottom: 24%;
+  transform: rotate(-10deg);
+}
+
+.botanical-layout-2 .botanical-spray-anchor--right {
+  top: 24%;
+  transform: rotate(10deg);
+}
+
+.botanical-layout-3 .botanical-spray-anchor--left {
+  bottom: 18%;
+  transform: rotate(-6deg);
+}
+
+.botanical-layout-3 .botanical-spray-anchor--right {
+  top: 18%;
+  transform: rotate(8deg);
+}
+
+.botanical-layout-4 .botanical-spray-anchor--left {
+  bottom: 24%;
+  transform: rotate(8deg);
+}
+
+.botanical-layout-4 .botanical-spray-anchor--right {
+  top: 24%;
+  transform: rotate(-10deg);
+}
+
 .intro-panel.is-active::before {
   content: "";
   position: absolute;
@@ -238,6 +327,72 @@ onBeforeUnmount(() => {
   100% {
     opacity: 0.35;
     transform: scale(1.08);
+  }
+}
+
+@keyframes botanicalDrift {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-panel.is-active .botanical-spray-anchor {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .botanical-spray-anchor {
+    width: 5rem;
+    height: 8rem;
+    opacity: 0.34;
+  }
+
+  .botanical-spray-anchor--left {
+    top: auto;
+    bottom: 1.5rem;
+    left: 1rem;
+  }
+
+  .botanical-spray-anchor--right {
+    top: auto;
+    right: 1rem;
+    bottom: 1.5rem;
+  }
+
+  .botanical-layout-1 .botanical-spray-anchor--left,
+  .botanical-layout-2 .botanical-spray-anchor--left,
+  .botanical-layout-3 .botanical-spray-anchor--left,
+  .botanical-layout-4 .botanical-spray-anchor--left,
+  .botanical-layout-1 .botanical-spray-anchor--right,
+  .botanical-layout-2 .botanical-spray-anchor--right,
+  .botanical-layout-3 .botanical-spray-anchor--right,
+  .botanical-layout-4 .botanical-spray-anchor--right {
+    top: auto;
+  }
+
+  .botanical-layout-1 .botanical-spray-anchor--left {
+    bottom: 3rem;
+  }
+
+  .botanical-layout-1 .botanical-spray-anchor--right,
+  .botanical-layout-2 .botanical-spray-anchor--left,
+  .botanical-layout-4 .botanical-spray-anchor--left {
+    bottom: 1.5rem;
+  }
+
+  .botanical-layout-2 .botanical-spray-anchor--right {
+    bottom: 3rem;
+  }
+
+  .botanical-layout-3 .botanical-spray-anchor--left,
+  .botanical-layout-3 .botanical-spray-anchor--right,
+  .botanical-layout-4 .botanical-spray-anchor--right {
+    bottom: 2.25rem;
   }
 }
 </style>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, ref } from 'vue'
 import { gsap } from 'gsap'
+import FlowerAccent from '@/components/ui/FlowerAccent.vue'
+import { flowerAssets } from '@/config/flowerAssets'
 
 const emit = defineEmits<{
 	opening: []
@@ -63,9 +65,15 @@ onBeforeUnmount(() => {
 				<svg class="flap-edge-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 50 100 L 100 0" /></svg>
 			</div>
 			<div ref="leftFlapRef" class="envelope-fold envelope-left-flap absolute inset-y-0 left-0 w-1/2">
+				<!-- <div class="envelope-botanical envelope-botanical-left">
+					<FlowerAccent :src="flowerAssets[7]" tone="gold" class="h-full w-full" />
+				</div> -->
 				<svg class="flap-edge-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 100 50 L 0 100" /></svg>
 			</div>
 			<div ref="rightFlapRef" class="envelope-fold envelope-right-flap absolute inset-y-0 right-0 w-1/2">
+				<div class="envelope-botanical envelope-botanical-right">
+					<FlowerAccent :src="flowerAssets[7]" tone="cream" class="h-full w-full" />
+				</div>
 				<svg class="flap-edge-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 100 0 L 0 50 L 100 100" /></svg>
 			</div>
 			<div ref="bottomFlapRef" class="envelope-fold envelope-bottom-flap absolute inset-x-0 bottom-0 h-[58%]">
@@ -131,6 +139,38 @@ onBeforeUnmount(() => {
 	transform-style: preserve-3d;
 	border: 2px solid color-mix(in srgb, var(--color-luxury-gold) var(--envelope-edge-alpha), transparent);
 	filter: drop-shadow(0 18px 24px color-mix(in srgb, var(--color-luxury-dark) 50%, transparent)) drop-shadow(0 0 2px color-mix(in srgb, var(--color-luxury-cream) var(--envelope-edge-highlight), transparent));
+}
+
+.envelope-botanical {
+	position: absolute;
+	z-index: 4;
+	width: clamp(7.5rem, 11vw, 10rem);
+	height: clamp(11rem, 26vh, 17rem);
+	color: var(--color-luxury-gold);
+	opacity: 0.46;
+	pointer-events: none;
+	top: 50%;
+	transform: translateY(-50%);
+	animation: envelopeBotanicalDrift 7s ease-in-out infinite;
+}
+
+.envelope-botanical-left {
+	left: 0.75rem;
+}
+
+.envelope-botanical-right {
+	width: 220in;
+	right: 0.75rem;
+	animation-delay: -2.4s;
+}
+
+@keyframes envelopeBotanicalDrift {
+	0%, 100% {
+		translate: 0 0;
+	}
+	50% {
+		translate: 0 -5px;
+	}
 }
 
 .flap-edge-lines {
@@ -325,6 +365,12 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 480px) {
+	.envelope-botanical {
+		width: 7.25rem;
+		height: 12rem;
+		opacity: 0.44;
+	}
+
 	.envelope-seal-button {
 		width: 6.8rem;
 		height: 6.8rem;
@@ -332,6 +378,12 @@ onBeforeUnmount(() => {
 
 	.envelope-seal-copy strong {
 		font-size: 1rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.envelope-botanical {
+		animation: none;
 	}
 }
 </style>
