@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import confetti from 'canvas-confetti'
 import { useScratchCanvas } from '@/composables/useScratchCanvas'
 import Labels from '@/config/labels.json'
+import { formatWeddingDate } from '@/utils/weddingDate'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const containerRef = ref<HTMLElement | null>(null)
@@ -52,8 +53,8 @@ onMounted(() => {
 
         <div class="z-10 p-4 select-none space-y-3">
           <span class="scratch-card-badge inline-flex items-center rounded-full border border-luxury-gold/25 bg-luxury-dark/35 px-3 py-1 font-sans text-[10px] tracking-[0.28em] uppercase text-luxury-gold">You’re Invited</span>
-          <h4 class="pt-2 font-serif text-2xl font-light tracking-[0.08em] text-luxury-cream">{{ Labels.scratchCard.date }}</h4>
-          <p class="font-mono text-base tracking-[0.25em] text-luxury-gold">{{ Labels.scratchCard.time }}</p>
+          <h4 class="pt-2 font-serif text-2xl font-light tracking-[0.08em] text-luxury-cream">{{ formatWeddingDate('longDate') }}</h4>
+          <p class="font-mono text-base tracking-[0.25em] text-luxury-gold">{{ formatWeddingDate('time') }}</p>
           <div class="mx-auto my-1 h-px w-12 bg-gradient-to-r from-transparent via-luxury-gold to-transparent"></div>
           <p class="text-base font-sans uppercase tracking-[0.14em] text-gray-400">{{ Labels.venueName }}</p>
           <p class="text-xs font-sans uppercase tracking-[0.24em] text-gray-500">{{ Labels.venueAddress }}</p>

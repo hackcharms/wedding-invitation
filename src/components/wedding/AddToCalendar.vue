@@ -2,14 +2,15 @@
 import { ref } from 'vue'
 import { generateGoogleCalendarUrl, generateIcalDataUrl, type CalendarEventData } from '@/utils/calendarGenerator'
 import Labels from '@/config/labels.json'
+import { formatWeddingDate } from '@/utils/weddingDate'
 
 // Centralized Event Specifications
 const weddingEventData = ref<CalendarEventData>({
   title: `${Labels.groom} & ${Labels.bride} - Wedding Ceremony & Reception`,
-  description: 'Join us as we celebrate our union. Please arrive early for the Guest Arrival at 6:00 PM.',
+  description: `Join us as we celebrate our union. Please arrive early for the Guest Arrival at ${formatWeddingDate('time')}.`,
   location: `${Labels.venueName},${Labels.venueAddress}`,
-  startDate: '20261214T180000', // Sept 14, 2026 at 18:00 (6 PM)
-  endDate: '20261214T233000'   // Concludes around 11:30 PM
+  startDate: formatWeddingDate('calendarStart'),
+  endDate: formatWeddingDate('calendarEnd')
 })
 
 const googleUrl = generateGoogleCalendarUrl(weddingEventData.value)

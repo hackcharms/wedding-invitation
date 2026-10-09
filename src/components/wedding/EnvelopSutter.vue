@@ -85,8 +85,8 @@ onBeforeUnmount(() => {
 					<span class="envelope-seal-ring"></span>
 					<span class="envelope-seal-star">✦</span>
 					<span class="envelope-seal-copy">
-						<span>Open</span>
-						<strong>Love</strong>
+						<span>You’re</span>
+						<strong>Invited</strong>
 					</span>
 				</button>
 			</div>
@@ -310,7 +310,7 @@ onBeforeUnmount(() => {
 
 .envelope-seal-copy strong {
 	font-family: var(--font-serif);
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font-weight: 400;
 	letter-spacing: 0.18em;
 }
@@ -377,7 +377,7 @@ onBeforeUnmount(() => {
 	}
 
 	.envelope-seal-copy strong {
-		font-size: 1rem;
+		font-size: .8rem;
 	}
 }
 

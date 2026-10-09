@@ -6,8 +6,8 @@ import Labels from '@/config/labels.json'
 </script>
 
 <template>
-  <header class="w-full h-full mx-auto overflow-hidden relative text-center flex flex-col items-center justify-center">
-    <div class="relative flex h-32 w-full items-start justify-between">
+  <header class="w-full h-full mx-auto overflow-visible relative text-center flex flex-col items-center justify-center">
+    <div class="invitation-header-ornament relative flex h-32 w-full items-start justify-between">
       <div class="pointer-events-none absolute inset-0 opacity-[0.03] ethnic-grid-mask"></div>
       <Lantern class="w-14 h-36 text-luxury-cream/90" />
       <div class="pointer-events-none w-56 select-none opacity-90 sm:w-64">
@@ -16,7 +16,7 @@ import Labels from '@/config/labels.json'
       <Lantern class="w-14 h-36 text-luxury-cream/90" />
     </div>
 
-    <div class="relative z-10 mt-0 grow  flex w-full flex-col items-center justify-center gap-5 px-3 sm:px-6">
+    <div class="relative z-10 mt-0 grow flex w-full flex-col items-center justify-center gap-3 px-3 sm:px-6">
       <div class="flex items-center justify-center text-luxury-gold select-none">
         <Bismillah class="mx-auto h-auto w-56 sm:w-64" />
       </div>
@@ -28,8 +28,8 @@ import Labels from '@/config/labels.json'
       </p>
 
       <div class="w-full rounded-[28px] border border-luxury-gold/20 bg-white/[0.02] px-4 py-5 shadow-[0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-[1px] sm:px-6 lg:px-8">
-        <div class="space-y-2 font-parisienne font-bold">
-          <h1 class="bg-gradient-to-b from-white via-luxury-cream to-luxury-gold bg-clip-text text-4xl tracking-[0.08em] text-transparent drop-shadow-[0_0_12px_rgba(212,175,55,0.18)] sm:text-5xl lg:text-6xl">
+        <div class="space-y-2 font-lavishly">
+          <h1 class="bg-gradient-to-b from-white via-luxury-cream to-luxury-gold bg-clip-text text-4xl leading-[1.35] tracking-normal text-transparent drop-shadow-[0_0_12px_rgba(212,175,55,0.18)] sm:text-5xl lg:text-6xl">
             {{ Labels.groom }}
           </h1>
 
@@ -39,7 +39,7 @@ import Labels from '@/config/labels.json'
             <div class="h-[0.5px] w-10 bg-gradient-to-l from-transparent to-luxury-gold/40 sm:w-12"></div>
           </div>
 
-          <h1 class="bg-gradient-to-b from-white via-luxury-cream to-luxury-gold bg-clip-text text-4xl tracking-[0.08em] text-transparent drop-shadow-[0_0_12px_rgba(212,175,55,0.18)] sm:text-5xl lg:text-6xl">
+          <h1 class="bg-gradient-to-b from-white via-luxury-cream to-luxury-gold bg-clip-text text-4xl leading-[1.35] tracking-normal text-transparent drop-shadow-[0_0_12px_rgba(212,175,55,0.18)] sm:text-5xl lg:text-6xl">
             {{ Labels.bride }}
           </h1>
         </div>
@@ -56,5 +56,11 @@ import Labels from '@/config/labels.json'
 .ethnic-grid-mask {
   background-image: radial-gradient(circle at 50% 50%, #d4af37 1px, transparent 1px);
   background-size: 12px 12px;
+}
+
+@media (max-height: 500px) {
+  .invitation-header-ornament {
+    height: 6rem;
+  }
 }
 </style>

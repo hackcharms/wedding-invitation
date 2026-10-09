@@ -237,12 +237,12 @@ onBeforeUnmount(() => {
 }
 
 .botanical-spray-anchor--left {
-  bottom: 14%;
+  bottom: 24%;
   left: 2rem;
 }
 
 .botanical-spray-anchor--right {
-  top: 14%;
+  top: 24%;
   right: 2rem;
 }
 
@@ -354,14 +354,14 @@ onBeforeUnmount(() => {
 
   .botanical-spray-anchor--left {
     top: auto;
-    bottom: 1.5rem;
+    bottom: 2.5rem;
     left: 1rem;
   }
 
   .botanical-spray-anchor--right {
     top: auto;
     right: 1rem;
-    bottom: 1.5rem;
+    bottom: 2.5rem;
   }
 
   .botanical-layout-1 .botanical-spray-anchor--left,
@@ -382,7 +382,7 @@ onBeforeUnmount(() => {
   .botanical-layout-1 .botanical-spray-anchor--right,
   .botanical-layout-2 .botanical-spray-anchor--left,
   .botanical-layout-4 .botanical-spray-anchor--left {
-    bottom: 1.5rem;
+    bottom: 2.5rem;
   }
 
   .botanical-layout-2 .botanical-spray-anchor--right {

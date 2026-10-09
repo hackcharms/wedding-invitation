@@ -17,7 +17,7 @@ import { useCountdown } from "@/composables/useCountdown";
 
 const appUnlocked = ref(false);
 const scratchRevealed = ref(false);
-const { timeRemaining } = useCountdown(Labels.date);
+const { timeRemaining } = useCountdown(Labels.eventDateTimeUtc);
 </script>
 
 <template>

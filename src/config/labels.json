@@ -1,15 +1,12 @@
 {
-    "groom": "Beta Ahmad",
-    "bride": "Alpha Gama",
+    "groom": "Zubair Ahmad",
+    "bride": "Ansari Shanno",
     "venueName": "Green Lawn Wedding Hall",
     "venueAddress": "Kalsekar, Mumbra, Thane, Maharashtra 400612",
-    "date": "2026-12-14",
-    "dateString": "December 14",
-    "time": "6:00 PM",
+    "eventDateTimeUtc": "2026-12-14T12:30:00.000Z",
+    "eventTimeZone": "Asia/Kolkata",
     "scratchCard":{
-        "label":"Scratch to Reveal",
-        "date":"Monday, Dec 14, 2026",
-        "time":"6:00 PM"
+        "label":"Scratch to Reveal"
     },
     "closing": {
         "eyebrow": "With gratitude & blessings",

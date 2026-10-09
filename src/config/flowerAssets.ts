@@ -1,5 +1,4 @@
 import flower37872 from '@/assets/flower/37872.svg'
-// import flower23924 from '@/assets/flower/23924.svg'
 import flower303848 from '@/assets/flower/303848.svg'
 import flower2027567 from '@/assets/flower/2027567.svg'
 import flower2022690 from '@/assets/flower/2022690.svg'
@@ -13,13 +12,12 @@ import flower303530 from '@/assets/flower/303530.svg'
 import flower306568 from '@/assets/flower/306568.svg'
 export const flowerAssets = [
 flower37872,
-// flower23924,
 flower303848,
 flower2027567,
 flower2022690,
 flower1849411,
-flower1532531,
 flower1298017,
+flower1532531,
 flower1003330,
 flower32802,
 flower38168,

@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap');
 @import "tailwindcss";
 @theme {
-  --font-parisienne: "Parisienne", cursive;
+  --font-lavishly: "Lavishly Yours", cursive;
   --font-serif: "Cinzel", "Playfair Display", Georgia, serif;
   --font-sans: "Montserrat", "Inter", sans-serif;
 

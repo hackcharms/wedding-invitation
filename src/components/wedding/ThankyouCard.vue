@@ -19,7 +19,7 @@ import Labels from '@/config/labels.json'
 
       <p class="mt-6 text-xl font-serif text-luxury-gold">{{ Labels.closing.blessing }}</p>
 
-      <div class="mt-5 font-parisienne text-[2.4rem] leading-none text-luxury-cream/95 tracking-[0.04em]">
+      <div class="mt-5 font-lavishly text-[2.4rem] leading-none text-luxury-cream/95 tracking-[0.04em]">
         {{ Labels.groom }} &amp; {{ Labels.bride }}
       </div>
     </div>
