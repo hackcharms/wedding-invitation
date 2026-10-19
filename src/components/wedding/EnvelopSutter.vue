@@ -3,6 +3,7 @@ import { nextTick, onBeforeUnmount, ref } from 'vue'
 import { gsap } from 'gsap'
 import FlowerAccent from '@/components/ui/FlowerAccent.vue'
 import { flowerAssets } from '@/config/flowerAssets'
+import monogramUrl from '@/assets/monogram.png'
 
 const emit = defineEmits<{
 	opening: []
@@ -17,6 +18,13 @@ const rightFlapRef = ref<HTMLElement | null>(null)
 const bottomFlapRef = ref<HTMLElement | null>(null)
 const sealRef = ref<HTMLElement | null>(null)
 const gateRef = ref<HTMLElement | null>(null)
+
+const sealFragments = [
+	{ clip: 'polygon(0 0, 48% 0, 52% 16%, 47% 29%, 53% 40%, 50% 50%, 41% 48%, 31% 53%, 17% 47%, 0 51%)', x: -62, y: -48, rotation: -24 },
+	{ clip: 'polygon(48% 0, 100% 0, 100% 52%, 87% 49%, 76% 54%, 63% 47%, 50% 50%, 53% 40%, 47% 29%, 52% 16%)', x: 58, y: -54, rotation: 28 },
+	{ clip: 'polygon(0 51%, 17% 47%, 31% 53%, 41% 48%, 50% 50%, 47% 63%, 54% 77%, 49% 89%, 51% 100%, 0 100%)', x: -54, y: 65, rotation: -32 },
+	{ clip: 'polygon(50% 50%, 63% 47%, 76% 54%, 87% 49%, 100% 52%, 100% 100%, 51% 100%, 49% 89%, 54% 77%, 47% 63%)', x: 64, y: 58, rotation: 22 },
+]
 
 let animation: gsap.core.Timeline | null = null
 
@@ -43,8 +51,17 @@ async function openEnvelope() {
 	})
 
 	animation
-		.to(sealRef.value, { scale: 0.78, rotation: 18, opacity: 0, duration: 0.42, ease: 'power2.in' })
-		.to(topFlapRef.value, { rotateX: -172, yPercent: -8, duration: 0.95, transformOrigin: '50% 0%' }, '<0.08')
+		.to(sealRef.value, { scale: 0.96, duration: 0.1, ease: 'power1.in' })
+		.to(sealRef.value!.querySelectorAll('.envelope-seal-piece'), {
+			xPercent: (index: number) => sealFragments[index]!.x,
+			yPercent: (index: number) => sealFragments[index]!.y,
+			rotation: (index: number) => sealFragments[index]!.rotation,
+			scale: 0.92,
+			opacity: 0,
+			duration: 0.55,
+			ease: 'power2.out',
+		})
+		.to(topFlapRef.value, { rotateX: -172, yPercent: -8, duration: 0.95, transformOrigin: '50% 0%' }, '<0.22')
 		.to(leftFlapRef.value, { xPercent: -112, rotation: -4, duration: 1.05, transformOrigin: '100% 50%' }, '-=0.58')
 		.to(rightFlapRef.value, { xPercent: 112, rotation: 4, duration: 1.05, transformOrigin: '0% 50%' }, '<')
 		.to(bottomFlapRef.value, { yPercent: 108, rotateX: 12, duration: 0.9, transformOrigin: '50% 100%' }, '-=0.78')
@@ -81,12 +98,15 @@ onBeforeUnmount(() => {
 			</div>
 
 			<div ref="sealRef" class="envelope-seal absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
-				<button type="button" class="envelope-seal-button" :disabled="isOpening" @click="openEnvelope">
-					<span class="envelope-seal-ring"></span>
-					<span class="envelope-seal-star">✦</span>
-					<span class="envelope-seal-copy">
-						<span>You’re</span>
-						<strong>Invited</strong>
+				<button type="button" class="envelope-seal-button" aria-label="Break the wax seal and open your invitation" title="Open invitation" :disabled="isOpening" @click="openEnvelope">
+					<span
+						v-for="(fragment, index) in sealFragments"
+						:key="index"
+						class="envelope-seal-piece"
+						:style="{ clipPath: fragment.clip }"
+						aria-hidden="true"
+					>
+						<img :src="monogramUrl" alt="" class="envelope-seal-monogram" width="128" height="128" :draggable="false">
 					</span>
 				</button>
 			</div>
@@ -262,57 +282,63 @@ onBeforeUnmount(() => {
 .envelope-seal-button {
 	position: relative;
 	display: flex;
-	width: 8rem;
-	height: 8rem;
+	width: 9rem;
+	height: 9rem;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid color-mix(in srgb, var(--color-luxury-gold) 90%, transparent);
+	border: 0;
 	border-radius: 9999px;
-	background: radial-gradient(circle at 50% 30%, var(--color-luxury-cream), var(--color-luxury-gold) 70%, var(--color-luxury-bronze));
-	color: var(--color-luxury-emerald);
-	box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-luxury-dark) 20%, transparent), 0 12px 34px color-mix(in srgb, var(--color-luxury-dark) 36%, transparent), 0 0 36px color-mix(in srgb, var(--color-luxury-gold) 40%, transparent);
+	background: none;
+	box-shadow: none;
+	filter: drop-shadow(0 7px 9px rgba(35, 12, 21, 0.35)) drop-shadow(0 0 12px color-mix(in srgb, var(--color-luxury-gold) 22%, transparent));
 	cursor: pointer;
-	transition: transform 250ms ease, box-shadow 250ms ease;
+	touch-action: manipulation;
+	transition: transform 250ms ease, filter 250ms ease;
 }
 
-.envelope-seal-button:hover {
-	transform: scale(1.05);
-	box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-luxury-dark) 20%, transparent), 0 16px 42px color-mix(in srgb, var(--color-luxury-dark) 42%, transparent), 0 0 48px color-mix(in srgb, var(--color-luxury-gold) 50%, transparent);
+.envelope-seal-button:hover:not(:disabled) {
+	transform: scale(1.04);
+	filter: drop-shadow(0 9px 12px rgba(35, 12, 21, 0.4)) drop-shadow(0 0 18px color-mix(in srgb, var(--color-luxury-gold) 30%, transparent));
 }
 
-.envelope-seal-ring {
+.envelope-seal-button:focus-visible {
+	outline: 2px solid var(--color-luxury-gold);
+	outline-offset: 6px;
+}
+
+.envelope-seal-button:disabled {
+	cursor: default;
+}
+
+.envelope-seal-piece {
 	position: absolute;
-	inset: 0.7rem;
-	border: 1px solid color-mix(in srgb, var(--color-luxury-emerald) 38%, transparent);
-	border-radius: inherit;
+	isolation: isolate;
+	inset: 0;
+	border: 1px solid color-mix(in srgb, var(--color-luxury-gold) 45%, transparent);
+	border-radius: 47% 53% 49% 51% / 52% 47% 53% 48%;
+	background: radial-gradient(ellipse at 32% 22%, color-mix(in srgb, var(--color-petal, var(--color-luxury-gold)) 58%, white), var(--color-petal, var(--color-luxury-gold)) 55%, color-mix(in srgb, var(--color-petal, var(--color-luxury-gold)) 65%, #40131f));
+	box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.45), inset 0 -4px 7px rgba(62, 14, 32, 0.35), inset 0 0 0 5px color-mix(in srgb, var(--color-petal, var(--color-luxury-gold)) 75%, #782e45);
+	pointer-events: none;
 }
 
-.envelope-seal-star {
+.envelope-seal-piece::after {
+	content: '';
 	position: absolute;
-	top: -1.2rem;
-	font-size: 1.5rem;
-	color: var(--color-luxury-cream);
+	inset: 0.55rem;
+	border: 1px solid color-mix(in srgb, var(--color-luxury-bronze) 55%, transparent);
+	border-radius: 50%;
+	box-shadow: 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 1px 2px rgba(62, 14, 32, 0.18);
 }
 
-.envelope-seal-copy {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	line-height: 1;
-	text-transform: uppercase;
-}
-
-.envelope-seal-copy span {
-	margin-bottom: 0.35rem;
-	font-size: 0.65rem;
-	letter-spacing: 0.38em;
-}
-
-.envelope-seal-copy strong {
-	font-family: var(--font-serif);
-	font-size: 1rem;
-	font-weight: 400;
-	letter-spacing: 0.18em;
+.envelope-seal-monogram {
+	position: absolute;
+	inset: 13%;
+	width: 74%;
+	height: 74%;
+	object-fit: contain;
+	filter: grayscale(1) contrast(1.1) brightness(0.65) drop-shadow(0 1px 1px color-mix(in srgb, var(--color-luxury-bronze) 50%, transparent));
+	mix-blend-mode: multiply;
+	user-select: none;
 }
 
 :global(html[data-theme='dark']) .envelope-fold {
@@ -355,13 +381,8 @@ onBeforeUnmount(() => {
 }
 
 :global(html[data-theme='light']) .envelope-seal-button {
-	background: radial-gradient(circle at 50% 30%, var(--color-luxury-card), var(--color-luxury-emerald) 70%, var(--color-theme-emerald-light));
-	color: var(--color-luxury-cream);
-	box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-luxury-card) 55%, transparent), 0 12px 34px rgba(63, 82, 68, 0.24), 0 0 36px color-mix(in srgb, var(--color-luxury-gold) 32%, transparent);
-}
-
-:global(html[data-theme='light']) .envelope-seal-ring {
-	border-color: color-mix(in srgb, var(--color-luxury-cream) 32%, transparent);
+	background: none;
+	box-shadow: none;
 }
 
 @media (max-width: 480px) {
@@ -372,16 +393,16 @@ onBeforeUnmount(() => {
 	}
 
 	.envelope-seal-button {
-		width: 6.8rem;
-		height: 6.8rem;
-	}
-
-	.envelope-seal-copy strong {
-		font-size: .8rem;
+		width: 7.5rem;
+		height: 7.5rem;
 	}
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.envelope-seal-button {
+		transition: none;
+	}
+
 	.envelope-botanical {
 		animation: none;
 	}
