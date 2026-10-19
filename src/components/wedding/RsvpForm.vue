@@ -45,7 +45,7 @@ const processRSVP = (): void => {
 
 <template>
   <section
-    class="max-w-sm mx-auto w-full p-6 bg-luxury-card/90 backdrop-blur-md rounded-xl border border-luxury-gold/20 shadow-xl"
+    class="panel-glow max-w-sm mx-auto w-full p-6 bg-luxury-card/90 backdrop-blur-md rounded-xl border border-luxury-gold/20 shadow-xl"
   >
     <div class="text-center mb-6">
       <span class="text-xs text-luxury-gold">💌</span>

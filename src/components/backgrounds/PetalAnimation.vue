@@ -77,7 +77,7 @@ defineExpose({
       aria-hidden="true"
     />
 
-    <div
+    <!-- <div
       v-if="controls"
       class="petal-animation__controls"
     >
@@ -91,7 +91,7 @@ defineExpose({
       <button type="button" @click="restart">
         Restart
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 

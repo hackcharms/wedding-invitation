@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 import type { ScratchOptions } from '@/types/wedding'
 
 export function useScratchCanvas(options: ScratchOptions = {}) {
@@ -10,6 +10,48 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
   let isDrawing = false
   let lastX = 0
   let lastY = 0
+  let themeObserver: MutationObserver | undefined
+
+  const paintCoating = (preserveScratches = false): void => {
+    if (!ctx) return
+
+    const canvasElement = ctx.canvas
+    const mask = preserveScratches ? document.createElement('canvas') : null
+    if (mask) {
+      mask.width = canvasElement.width
+      mask.height = canvasElement.height
+      const maskContext = mask.getContext('2d')
+      if (!maskContext) return
+      maskContext.drawImage(canvasElement, 0, 0)
+    }
+
+    const styles = getComputedStyle(document.documentElement)
+    const color = (property: string, fallback: string): string => styles.getPropertyValue(property).trim() || fallback
+
+    ctx.save()
+    ctx.globalCompositeOperation = 'source-over'
+    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height)
+    const gradient = ctx.createLinearGradient(0, 0, canvasElement.width, canvasElement.height)
+    gradient.addColorStop(0, color('--color-theme-gold-light', '#E7C75A'))
+    gradient.addColorStop(0.5, color('--color-luxury-gold', '#D4AF37'))
+    gradient.addColorStop(1, color('--color-luxury-bronze', '#AA771C'))
+    
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, canvasElement.width, canvasElement.height)
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'
+    ctx.fillRect(0, 0, canvasElement.width, canvasElement.height)
+    
+    ctx.fillStyle = color('--color-luxury-dark', '#111827')
+    ctx.font = 'bold 16px sans-serif'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText('✨ SCRATCH TO REVEAL DATE ✨', canvasElement.width / 2, canvasElement.height / 2)
+    if (mask) {
+      ctx.globalCompositeOperation = 'destination-in'
+      ctx.drawImage(mask, 0, 0)
+    }
+    ctx.restore()
+  }
 
   const initCanvas = (canvasElement: HTMLCanvasElement, containerElement: HTMLElement): void => {
     ctx = canvasElement.getContext('2d', { willReadFrequently: true })
@@ -18,20 +60,16 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
     const rect = containerElement.getBoundingClientRect()
     canvasElement.width = rect.width
     canvasElement.height = rect.height
-    
-    const gradient = ctx.createLinearGradient(0, 0, canvasElement.width, canvasElement.height)
-    gradient.addColorStop(0, '#D4AF37')
-    gradient.addColorStop(0.5, '#AA771C')
-    gradient.addColorStop(1, '#8B6508')
-    
-    ctx.fillStyle = gradient
-    ctx.fillRect(0, 0, canvasElement.width, canvasElement.height)
-    
-    ctx.fillStyle = '#111827'
-    ctx.font = 'bold 16px sans-serif'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    ctx.fillText('✨ SCRATCH TO REVEAL DATE ✨', canvasElement.width / 2, canvasElement.height / 2)
+    paintCoating()
+
+    themeObserver?.disconnect()
+    themeObserver = new MutationObserver(() => {
+      if (!isFullyRevealed.value) paintCoating(true)
+    })
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'data-palette', 'style'],
+    })
   }
 
   const startScratching = (e: PointerEvent, canvasElement: HTMLCanvasElement): void => {
@@ -78,6 +116,11 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
   }
 
   const stopScratching = (): void => { isDrawing = false }
+
+  onBeforeUnmount(() => {
+    themeObserver?.disconnect()
+    ctx = null
+  })
 
   return {
     scratchPercentage,

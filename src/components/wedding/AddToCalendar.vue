@@ -18,7 +18,7 @@ const icalUrl = generateIcalDataUrl(weddingEventData.value)
 </script>
 
 <template>
-  <div class="max-w-xs mx-auto w-full p-4 bg-luxury-card/40 border border-luxury-gold/10 rounded-xl space-y-4 text-center">
+  <div class="panel-glow max-w-xs mx-auto w-full p-4 bg-luxury-card/40 border border-luxury-gold/10 rounded-xl space-y-4 text-center">
     <div class="space-y-1">
       <span class="text-lg text-luxury-gold">📅</span>
       <h4 class="font-serif text-lg tracking-[0.2em] uppercase text-white">Save The Celebration</h4>

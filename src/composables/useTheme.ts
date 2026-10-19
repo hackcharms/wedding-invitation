@@ -1,12 +1,12 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { getWeddingTheme, weddingThemes, type ColorTheme, type ThemeMode } from '@/config/themes'
+import { DEFAULT_COLOR_THEME, getWeddingTheme, weddingThemes, type ColorTheme, type ThemeMode } from '@/config/themes'
 
 type Theme = ThemeMode
 
 const STORAGE_KEY = 'mission-shaadi-theme'
 const PALETTE_STORAGE_KEY = 'mission-shaadi-palette'
 const theme = ref<Theme>('dark')
-const colorTheme = ref<ColorTheme>('emerald')
+const colorTheme = ref<ColorTheme>(DEFAULT_COLOR_THEME)
 
 function readPreference(key: string): string | null {
   try {

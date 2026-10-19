@@ -331,37 +331,37 @@ onBeforeUnmount(() => {
 }
 
 :global(html[data-theme='light']) .envelope-gate {
-	background: #efe7d8;
+	background: var(--color-luxury-dark);
 }
 
 :global(html[data-theme='light']) .envelope-atmosphere {
 	background:
-		radial-gradient(circle at 50% 50%, rgba(183, 129, 35, 0.18), transparent 28%),
-		radial-gradient(circle at 50% 10%, rgba(255, 251, 238, 0.95), transparent 56%),
-		#dce8df;
+		radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--color-luxury-gold) 18%, transparent), transparent 28%),
+		radial-gradient(circle at 50% 10%, var(--color-luxury-card), transparent 56%),
+		var(--color-luxury-emerald);
 }
 
 :global(html[data-theme='light']) .envelope-top-flap {
-	background: linear-gradient(154deg, #d6e3d5 0%, #f8f2e5 62%, #bdcfbf 100%);
+	background: linear-gradient(154deg, var(--color-luxury-emerald) 0%, var(--color-luxury-card) 62%, var(--color-theme-emerald-light) 100%);
 }
 
 :global(html[data-theme='light']) .envelope-bottom-flap {
-	background: linear-gradient(28deg, #b9cfbe 0%, #e5eee2 55%, #c7d9c8 100%);
+	background: linear-gradient(28deg, var(--color-theme-emerald-light) 0%, var(--color-luxury-card) 55%, var(--color-luxury-emerald) 100%);
 }
 
 :global(html[data-theme='light']) .envelope-left-flap,
 :global(html[data-theme='light']) .envelope-right-flap {
-	background: linear-gradient(110deg, #b4cdbc 0%, #e7eee3 52%, #c1d6c3 100%);
+	background: linear-gradient(110deg, var(--color-theme-emerald-light) 0%, var(--color-luxury-card) 52%, var(--color-luxury-emerald) 100%);
 }
 
 :global(html[data-theme='light']) .envelope-seal-button {
-	background: radial-gradient(circle at 50% 30%, #fffdf8, #dceadf 70%, #b1cbb6);
-	color: #26322c;
-	box-shadow: 0 0 0 8px rgba(255, 253, 248, 0.55), 0 12px 34px rgba(63, 82, 68, 0.24), 0 0 36px rgba(167, 124, 19, 0.32);
+	background: radial-gradient(circle at 50% 30%, var(--color-luxury-card), var(--color-luxury-emerald) 70%, var(--color-theme-emerald-light));
+	color: var(--color-luxury-cream);
+	box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-luxury-card) 55%, transparent), 0 12px 34px rgba(63, 82, 68, 0.24), 0 0 36px color-mix(in srgb, var(--color-luxury-gold) 32%, transparent);
 }
 
 :global(html[data-theme='light']) .envelope-seal-ring {
-	border-color: rgba(38, 50, 44, 0.32);
+	border-color: color-mix(in srgb, var(--color-luxury-cream) 32%, transparent);
 }
 
 @media (max-width: 480px) {

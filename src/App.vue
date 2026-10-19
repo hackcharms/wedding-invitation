@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import InvitationLanding from '@/views/InvitationLandingScroll.vue'
 import ThemeToggle from '@/components/ui/ThemeToggle.vue'
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import PetalAnimation from '@/components/backgrounds/PetalAnimation.vue'
+import { useTheme } from '@/composables/useTheme'
 
-const animation = ref<InstanceType<typeof PetalAnimation> | null>(null)
+// const animation = ref<InstanceType<typeof PetalAnimation> | null>(null)
+const { selectedTheme } = useTheme()
 
 </script>
 
@@ -12,13 +14,14 @@ const animation = ref<InstanceType<typeof PetalAnimation> | null>(null)
   <div class="min-h-dvh w-full bg-luxury-dark text-luxury-cream antialiased selection:bg-luxury-gold/30 petal-preview">
     <ThemeToggle />
     <InvitationLanding/>
-    <button @click="animation?.pause()">Pause</button>
+    <!-- <button @click="animation?.pause()">Pause</button>
     <button @click="animation?.play()">Play</button>
-    <button @click="animation?.restart()">Restart</button>
+    <button @click="animation?.restart()">Restart</button> -->
     <PetalAnimation
       ref="animation"
       overlay
       :petal-count="80"
+      :petal-color="selectedTheme.petalColor"
     />
 
   </div>
@@ -32,6 +35,6 @@ html, body {
 }
 .petal-preview {
   min-height: 100svh;
-  background: linear-gradient(145deg, #fffdf7 0%, #f1f5ef 50%, #e3ede7 100%);
+  background: var(--theme-background, linear-gradient(145deg, #fffdf7 0%, #f1f5ef 50%, #e3ede7 100%));
 }
 </style>

@@ -41,7 +41,7 @@ const timelineEvents = ref<TimelineEvent[]>([
         <div
           v-for="(event, index) in timelineEvents"
           :key="index"
-          class="group relative rounded-[20px] border border-luxury-gold/10 bg-white/[0.015] p-4 shadow-[0_8px_18px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:border-luxury-gold/25"
+          class="panel-glow group relative rounded-[20px] border border-luxury-gold/10 bg-white/[0.015] p-4 shadow-[0_8px_18px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:border-luxury-gold/25"
         >
           <span class="absolute -left-[1.6rem] top-5 h-3.5 w-3.5 rounded-full border-2 border-luxury-dark bg-luxury-gold shadow-[0_0_12px_rgba(212,175,55,0.7)]"></span>
 

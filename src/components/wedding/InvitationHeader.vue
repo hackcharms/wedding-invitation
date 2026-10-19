@@ -27,7 +27,7 @@ import Labels from '@/config/labels.json'
         at the nikah ceremony of
       </p>
 
-      <div class="w-full rounded-[28px] border border-luxury-gold/20 bg-white/[0.02] px-4 py-5 shadow-[0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-[1px] sm:px-6 lg:px-8">
+      <div class="panel-glow w-full rounded-[28px] border border-luxury-gold/20 bg-white/[0.02] px-4 py-5 shadow-[0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-[1px] sm:px-6 lg:px-8">
         <div class="space-y-2 font-lavishly">
           <h1 class="bg-gradient-to-b from-white via-luxury-cream to-luxury-gold bg-clip-text text-4xl leading-[1.35] tracking-normal text-transparent drop-shadow-[0_0_12px_rgba(212,175,55,0.18)] sm:text-5xl lg:text-6xl">
             {{ Labels.groom }}

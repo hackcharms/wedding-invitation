@@ -1,5 +1,7 @@
-export type ColorTheme = 'emerald' | 'rose' | 'ocean'
+export type ColorTheme = 'emerald' | 'baby-rose' | 'purple'
 export type ThemeMode = 'light' | 'dark'
+
+export const DEFAULT_COLOR_THEME: ColorTheme = 'baby-rose'
 
 type ThemePalette = {
   background: string
@@ -39,39 +41,41 @@ export const weddingThemes: readonly WeddingTheme[] = [
     },
   },
   {
-    id: 'rose',
-    label: 'Rose',
-    swatch: '#ad526a',
-    petalColor: '#e29aa9',
+    id: 'baby-rose',
+    label: 'Baby Rose',
+    swatch: '#ec6095',
+    petalColor: '#ec6095',
     light: {
-      background: '#fbf2f4', card: '#fffafb', surface: '#f3dfe5',
-      accent: '#97405b', bronze: '#844157', text: '#492c36',
-      accentLight: '#b85b76', surfaceLight: '#e9c7d2',
+      background: '#fdf3f6', card: '#fffbfc', surface: '#f9e4ec',
+      accent: '#a83261', bronze: '#923352', text: '#50323e',
+      accentLight: '#cf477c', surfaceLight: '#f1cdda',
     },
     dark: {
-      background: '#190d13', card: '#25131c', surface: '#3a1929',
-      accent: '#edb4c5', bronze: '#cd8b9e', text: '#f8e9ee',
-      accentLight: '#f5ccda', surfaceLight: '#51263a',
+      background: '#22151d', card: '#301e28', surface: '#452b39',
+      accent: '#ec6095', bronze: '#cb5681', text: '#fceef3',
+      accentLight: '#f495b7', surfaceLight: '#5c384b',
     },
   },
   {
-    id: 'ocean',
-    label: 'Ocean',
-    swatch: '#287b87',
-    petalColor: '#92cdd5',
+    id: 'purple',
+    label: 'Purple',
+    swatch: '#9670c5',
+    petalColor: '#cfb4f1',
     light: {
-      background: '#eff7f8', card: '#f9fdfe', surface: '#dceef1',
-      accent: '#246675', bronze: '#315d6a', text: '#263e46',
-      accentLight: '#348292', surfaceLight: '#bfdde3',
+      background: '#f5f0fb', card: '#fdfaff', surface: '#e9def5',
+      accent: '#715091', bronze: '#684e80', text: '#3f2e50',
+      accentLight: '#9268b8', surfaceLight: '#d8c5eb',
     },
     dark: {
-      background: '#0b171c', card: '#112127', surface: '#14343d',
-      accent: '#92cdd5', bronze: '#6ba8b4', text: '#e5f2f4',
-      accentLight: '#bde3e8', surfaceLight: '#204852',
+      background: '#1b1226', card: '#261b33', surface: '#382449',
+      accent: '#cfb4f1', bronze: '#af8bce', text: '#f1e7fa',
+      accentLight: '#e1cef8', surfaceLight: '#503365',
     },
   },
 ]
 
 export function getWeddingTheme(value: string | null): WeddingTheme {
-  return weddingThemes.find(palette => palette.id === value) ?? weddingThemes[0]!
+  const themeId = value === 'ocean' ? 'purple' : value === 'rose' ? 'baby-rose' : value
+  return weddingThemes.find(palette => palette.id === themeId)
+    ?? weddingThemes.find(palette => palette.id === DEFAULT_COLOR_THEME)!
 }

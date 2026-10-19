@@ -32,6 +32,7 @@ type Petal = {
 	phase: number
 	alpha: number
 	depth: number
+	blur: number
 	tumble: number
 	tumbleSpeed: number
 	offsetX: number
@@ -89,12 +90,13 @@ export function usePetalAnimation(
 
 	function createPetal(randomY = false): Petal {
 		const depth = random(0.45, 1)
+		const blur = depth > 0.92 ? random(1.5, 3) : 0
 
 		return {
 			spriteIndex: Math.floor(random(0, petalSprites.length)),
 			x: random(0, width),
 			y: randomY ? random(0, height) : random(-height * 0.2, -10),
-			size: random(options.minSize, options.maxSize) * depth,
+			size: random(options.minSize, options.maxSize) * depth * (blur ? 1.5 : 1),
 			stretch: random(0.85, 1.15),
 			speedX: (random(-5, 5) + options.wind) * depth,
 			speedY: random(options.minSpeed, options.maxSpeed) * depth,
@@ -103,8 +105,9 @@ export function usePetalAnimation(
 			sway: random(options.sway * 0.4, options.sway) * depth,
 			swaySpeed: random(0.4, 1.1),
 			phase: random(0, Math.PI * 2),
-			alpha: random(0.65, 0.95),
+			alpha: random(0.65, 0.95) * (blur ? 0.75 : 1),
 			depth,
+			blur,
 			tumble: random(0, Math.PI * 2),
 			tumbleSpeed: random(0.6, 1.5) * (Math.random() < 0.5 ? -1 : 1),
 			offsetX: 0,
@@ -144,6 +147,11 @@ export function usePetalAnimation(
 		const texture = tintedTextures[sprite.textureIndex] ?? source
 
 		ctx.save()
+		ctx.filter = petal.blur ? `blur(${petal.blur}px)` : 'none'
+		if (petal.blur) {
+			ctx.shadowColor = options.petalColor || '#f6b6cf'
+			ctx.shadowBlur = petal.blur * 4
+		}
 		ctx.translate(petal.x + petal.offsetX, petal.y + petal.offsetY)
 		ctx.rotate(petal.angle + petal.offsetX * 0.004)
 
@@ -245,8 +253,8 @@ export function usePetalAnimation(
 		const strength = influence * petal.depth
 		const directionX = distance > 0 ? distanceX / distance : Math.cos(petal.angle)
 		const directionY = distance > 0 ? distanceY / distance : Math.sin(petal.angle)
-		const targetX = (directionX * 16 + pointer.velocityX * 0.15) * strength
-		const targetY = (directionY * 16 + pointer.velocityY * 0.15) * strength
+		const targetX = (directionX * 64 + pointer.velocityX * 0.3) * strength
+		const targetY = (directionY * 64 + pointer.velocityY * 0.3) * strength
 		const damping = Math.exp(-14 * dt)
 
 		petal.velocityX = (petal.velocityX + (targetX - petal.offsetX) * 70 * dt) * damping
@@ -395,4 +403,32 @@ export function usePetalAnimation(
 		document.addEventListener('pointerdown', handlePointer, { passive: true, capture: true })
 		document.addEventListener('pointermove', handlePointer, { passive: true, capture: true })
 		document.addEventListener('pointerup', handlePointerUp, { passive: true, capture: true })
-		document.addEventListene
+		document.addEventListener('pointerleave', clearPointer)
+		document.addEventListener('pointercancel', clearPointer, { passive: true, capture: true })
+		window.addEventListener('blur', clearPointer)
+		resize()
+		syncPetalCount()
+		if (shouldAnimate()) startLoop()
+	})
+
+	onBeforeUnmount(() => {
+		destroyed = true
+		stopLoop()
+		for (const texture of petalTextures) texture.onload = null
+		petalTextures.length = 0
+		tintedTextures.length = 0
+		observer?.disconnect()
+		document.removeEventListener('pointerdown', handlePointer, true)
+		document.removeEventListener('pointermove', handlePointer, true)
+		document.removeEventListener('pointerup', handlePointerUp, true)
+		document.removeEventListener('pointerleave', clearPointer)
+		document.removeEventListener('pointercancel', clearPointer, true)
+		window.removeEventListener('blur', clearPointer)
+		mediaQuery?.removeEventListener('change', handleMotionChange)
+		document.removeEventListener('visibilitychange', handleVisibilityChange)
+		petals.length = 0
+		ctx = null
+	})
+
+	return { isPaused, play, pause, restart }
+}

@@ -14,7 +14,7 @@ defineProps<{
       <div
         v-for="(value, unit) in { Days: timeData.days, Hours: timeData.hours, Mins: timeData.minutes, Secs: timeData.seconds }"
         :key="unit"
-        class="rounded-[18px] border border-luxury-gold/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] p-3 shadow-[0_8px_18px_rgba(0,0,0,0.15)]"
+        class="panel-glow rounded-[18px] border border-luxury-gold/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] p-3 shadow-[0_8px_18px_rgba(0,0,0,0.15)]"
       >
         <span
           class="block font-mono text-2xl font-light text-white"

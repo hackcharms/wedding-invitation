@@ -46,7 +46,7 @@ onMounted(() => {
 
     <div
       ref="containerRef"
-      class="scratch-card relative w-full max-w-[360px] aspect-[4/3] overflow-hidden rounded-[26px] border border-luxury-gold/25 bg-[linear-gradient(180deg,rgba(15,26,23,0.98),rgba(8,18,16,0.95))] p-[1px] shadow-[0_18px_38px_rgba(0,0,0,0.28)]"
+      class="scratch-card panel-glow relative w-full max-w-[360px] aspect-[4/3] overflow-hidden rounded-[26px] border border-luxury-gold/25 bg-[linear-gradient(180deg,rgba(15,26,23,0.98),rgba(8,18,16,0.95))] p-[1px] shadow-[0_18px_38px_rgba(0,0,0,0.28)]"
     >
       <div class="scratch-card-inner relative flex h-full w-full flex-col items-center justify-center rounded-[25px] border border-luxury-gold/12 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.08),transparent_48%)] p-6 text-center">
         <div class="scratch-card-glow absolute inset-0 pointer-events-none"></div>
