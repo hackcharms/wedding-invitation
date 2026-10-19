@@ -253,8 +253,8 @@ export function usePetalAnimation(
 		const strength = influence * petal.depth
 		const directionX = distance > 0 ? distanceX / distance : Math.cos(petal.angle)
 		const directionY = distance > 0 ? distanceY / distance : Math.sin(petal.angle)
-		const targetX = (directionX * 64 + pointer.velocityX * 0.3) * strength
-		const targetY = (directionY * 64 + pointer.velocityY * 0.3) * strength
+		const targetX = (directionX * 64 + pointer.velocityX * 0.5) * strength
+		const targetY = (directionY * 64 + pointer.velocityY * 0.5) * strength
 		const damping = Math.exp(-14 * dt)
 
 		petal.velocityX = (petal.velocityX + (targetX - petal.offsetX) * 70 * dt) * damping

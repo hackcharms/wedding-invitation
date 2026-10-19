@@ -85,15 +85,22 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
     const currentX = e.clientX - rect.left
     const currentY = e.clientY - rect.top
 
+    ctx.save()
     ctx.globalCompositeOperation = 'destination-out'
+    ctx.strokeStyle = '#000000'
     ctx.lineJoin = 'round'
     ctx.lineCap = 'round'
     ctx.lineWidth = 36
+    ctx.filter = 'blur(4px)'
 
     ctx.beginPath()
     ctx.moveTo(lastX, lastY)
     ctx.lineTo(currentX, currentY)
     ctx.stroke()
+    ctx.filter = 'none'
+    ctx.lineWidth = 24
+    ctx.stroke()
+    ctx.restore()
 
     lastX = currentX
     lastY = currentY
@@ -102,11 +109,13 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
     const imgData = ctx.getImageData(0, 0, canvasElement.width, canvasElement.height)
     const pixels = imgData.data
     let cleared = 0
-    for (let i = 3; i < pixels.length; i += 16) {
-      if (pixels[i] === 0) cleared++
+    let sampled = 0
+    for (let index = 3; index < pixels.length; index += 16) {
+      cleared += 1 - pixels[index]! / 255
+      sampled++
     }
 
-    const currentPercent = (cleared / (pixels.length / 16)) * 100
+    const currentPercent = sampled ? (cleared / sampled) * 100 : 0
     scratchPercentage.value = Math.round(currentPercent)
 
     if (currentPercent >= thresholdPercent) {

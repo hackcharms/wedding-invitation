@@ -26,6 +26,45 @@
   box-shadow: var(--tw-shadow, 0 0 transparent), var(--panel-glow);
 }
 
+.theme-action {
+  --theme-action-background: color-mix(in srgb, var(--color-luxury-dark) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-luxury-gold) 30%, transparent);
+  border-radius: 0.25rem;
+  background-color: var(--theme-action-background);
+  color: var(--color-luxury-gold);
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.theme-action--card {
+  --theme-action-background: color-mix(in srgb, var(--color-luxury-card) 30%, transparent);
+}
+
+:root[data-theme='light'] .theme-action {
+  --theme-action-background: color-mix(in srgb, var(--color-luxury-dark) 72%, transparent);
+}
+
+:root[data-theme='light'] .theme-action--card {
+  --theme-action-background: color-mix(in srgb, var(--color-luxury-card) 84%, transparent);
+}
+
+.theme-action:is(:hover, :focus-visible) {
+  background-color: var(--color-luxury-gold);
+  color: var(--color-luxury-dark);
+  border-color: var(--color-luxury-gold);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--color-luxury-gold) 28%, transparent), 0 4px 12px color-mix(in srgb, var(--color-luxury-gold) 12%, transparent);
+}
+
+.theme-action:focus-visible {
+  outline: 2px solid var(--color-luxury-gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-action {
+    transition: none;
+  }
+}
+
 :root {
   color-scheme: dark;
 

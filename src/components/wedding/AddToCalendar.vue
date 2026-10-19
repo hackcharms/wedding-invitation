@@ -18,7 +18,7 @@ const icalUrl = generateIcalDataUrl(weddingEventData.value)
 </script>
 
 <template>
-  <div class="panel-glow max-w-xs mx-auto w-full p-4 bg-luxury-card/40 border border-luxury-gold/10 rounded-xl space-y-4 text-center">
+  <div class="calendar-card panel-glow max-w-xs mx-auto w-full p-4 bg-luxury-card/40 border border-luxury-gold/10 rounded-xl space-y-4 text-center">
     <div class="space-y-1">
       <span class="text-lg text-luxury-gold">📅</span>
       <h4 class="font-serif text-lg tracking-[0.2em] uppercase text-white">Save The Celebration</h4>
@@ -32,7 +32,7 @@ const icalUrl = generateIcalDataUrl(weddingEventData.value)
       <a 
         :href="googleUrl" 
         target="_blank"
-        class="flex items-center justify-center gap-1.5 py-2 border border-luxury-gold/30 rounded bg-luxury-dark/40 text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
+        class="theme-action flex items-center justify-center gap-1.5 py-2"
       >
         <span>Google</span>
       </a>
@@ -41,7 +41,7 @@ const icalUrl = generateIcalDataUrl(weddingEventData.value)
       <a 
         :href="icalUrl" 
         download="zain-aisha-wedding.ics"
-        class="flex items-center justify-center gap-1.5 py-2 border border-luxury-gold/30 rounded bg-luxury-dark/40 text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
+        class="theme-action flex items-center justify-center gap-1.5 py-2"
       >
         <span>Apple / iCal</span>
       </a>
@@ -49,3 +49,12 @@ const icalUrl = generateIcalDataUrl(weddingEventData.value)
     </div>
   </div>
 </template>
+
+<style scoped>
+:global(html[data-theme='light']) .calendar-card {
+  --panel-glow: 0 0 24px color-mix(in srgb, var(--color-luxury-gold) 16%, transparent), inset 0 0 18px color-mix(in srgb, var(--color-luxury-gold) 6%, transparent);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--color-luxury-gold) 5%, var(--color-luxury-card)), var(--color-luxury-card) 70%);
+  border-color: color-mix(in srgb, var(--color-luxury-gold) 20%, transparent);
+}
+
+</style>

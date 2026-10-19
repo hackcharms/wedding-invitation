@@ -82,12 +82,12 @@ const { timeRemaining } = useCountdown(Labels.eventDateTimeUtc);
 
             <div class="flex items-center justify-center gap-3 pt-1 text-[9px] font-sans tracking-[0.2em] uppercase">
               <a href="https://maps.app.goo.gl/jn8cZxcHry6RbfPH8" target="_blank" rel="noreferrer"
-                class="rounded border border-luxury-gold/30 bg-luxury-card/30 px-3 py-1.5 text-base text-luxury-gold transition-all duration-300 hover:bg-luxury-gold hover:text-luxury-dark">
+                class="theme-action theme-action--card px-3 py-1.5 text-base">
                 Open Map
               </a>
               <a href="https://maps.apple.com/?q=Green%20Lawn%20Wedding%20Hall%2C%20Kalsekar&ll=19.1584187,73.0279245"
                 target="_blank" rel="noreferrer"
-                class="rounded border border-luxury-gold/30 bg-luxury-card/30 px-3 py-1.5 text-base text-luxury-gold transition-all duration-300 hover:bg-luxury-gold hover:text-luxury-dark">
+                class="theme-action theme-action--card px-3 py-1.5 text-base">
                 Apple Maps
               </a>
             </div>
@@ -100,3 +100,4 @@ const { timeRemaining } = useCountdown(Labels.eventDateTimeUtc);
     </main>
   </div>
 </template>
+
