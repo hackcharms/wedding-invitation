@@ -19,7 +19,7 @@ let autoplayPlugin: ReturnType<typeof Autoplay> | undefined
 
 const selectedIndex = ref<number>(0)
 const scrollSnaps = ref<number[]>([])
-const panelOpacities = ref<number[]>([1])
+const mountedPanelIndices = ref(new Set<number>())
 
 defineSlots<{
   [key: `panel-${number}`]: () => any
@@ -29,7 +29,9 @@ const panelCount = computed(() => Object.keys(slots).length)
 
 const onSelect = (api: EmblaCarouselType) => {
   selectedIndex.value = api.selectedScrollSnap()
-  updateOpacities()
+  for (let index = selectedIndex.value - 1; index <= selectedIndex.value + 1; index++) {
+    if (index >= 0 && index < panelCount.value) mountedPanelIndices.value.add(index)
+  }
 
   if (props.lockedPanelIndices.length > 0) {
     const firstLockedIndex = Math.min(...props.lockedPanelIndices)
@@ -46,24 +48,6 @@ const onSelect = (api: EmblaCarouselType) => {
   if (props.lockedPanelIndices.includes(nextIndex)) {
     autoplayPlugin?.stop()
   }
-}
-
-const updateOpacities = () => {
-  if (!emblaMainApi) return
-
-  const scrollProgress = emblaMainApi.scrollProgress()
-  const selectedSnap = emblaMainApi.selectedScrollSnap()
-
-  panelOpacities.value = Array.from({ length: panelCount.value }).map((_, index) => {
-    if (index === selectedSnap) return 1
-    if (index === selectedSnap + 1) {
-      return Math.max(0, scrollProgress - selectedSnap)
-    }
-    if (index === selectedSnap - 1) {
-      return Math.max(0, 1 - (scrollProgress - (selectedSnap - 1)))
-    }
-    return 0
-  })
 }
 
 const scrollToPanel = (index: number) => {
@@ -116,7 +100,6 @@ onMounted(() => {
 
   scrollSnaps.value = emblaMainApi.scrollSnapList()
   emblaMainApi.on('select', onSelect)
-  emblaMainApi.on('scroll', updateOpacities)
   onSelect(emblaMainApi)
 
   if (emblaViewportRef.value) {
@@ -154,12 +137,10 @@ onBeforeUnmount(() => {
         <div
           v-for="(_, index) in panelCount"
           :key="index"
-          class="intro-panel relative flex h-screen w-screen shrink-0 items-center justify-center px-4 transition-all duration-700 ease-out"
+          class="intro-panel relative flex h-screen w-screen shrink-0 items-center justify-center px-4"
           :class="{ 'is-active': index === selectedIndex }"
           :style="{
-            opacity: panelOpacities[index] ?? 1,
-            transform: `translateY(${index === selectedIndex ? 0 : 18}px) scale(${index === selectedIndex ? 1 : 0.98})`,
-            filter: `blur(${index === selectedIndex ? 0 : 1.5}px)`,
+            contentVisibility: Math.abs(index - selectedIndex) <= 1 ? 'visible' : 'hidden',
           }"
         >
           <div class="pointer-events-none absolute inset-0">
@@ -192,7 +173,7 @@ onBeforeUnmount(() => {
           </div>
 
           <div class="intro-stage relative z-10 flex h-full w-full max-w-140 flex-col items-center justify-center space-y-5 text-center">
-            <slot :name="`panel-${index + 1}`" />
+            <slot v-if="mountedPanelIndices.has(index)" :name="`panel-${index + 1}`" />
           </div>
         </div>
       </div>
@@ -222,6 +203,10 @@ onBeforeUnmount(() => {
 <style scoped>
 .intro-panel {
   position: relative;
+}
+
+.intro-panel:not(.is-active) :deep(*) {
+  animation-play-state: paused !important;
 }
 
 .intro-panel.is-active .intro-stage {
@@ -340,6 +325,19 @@ onBeforeUnmount(() => {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .intro-panel.is-active .botanical-spray-anchor,
+  .intro-panel.is-active .intro-stage,
+  .intro-panel.is-active::before {
+    animation: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .intro-panel.is-active::before,
+  .intro-panel > .pointer-events-none > .blur-3xl {
+    display: none;
+  }
+
   .intro-panel.is-active .botanical-spray-anchor {
     animation: none;
   }

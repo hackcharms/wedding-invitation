@@ -70,7 +70,7 @@ export function usePetalAnimation(
 	const isPaused = ref(options.paused)
 	const petals: Petal[] = []
 	const petalTextures: HTMLImageElement[] = []
-	const tintedTextures: HTMLCanvasElement[] = []
+	const preparedSprites: HTMLCanvasElement[] = []
 	const pointer = { active: false, x: 0, y: 0, velocityX: 0, velocityY: 0 }
 
 	let ctx: CanvasRenderingContext2D | null = null
@@ -81,16 +81,17 @@ export function usePetalAnimation(
 	let width = 0
 	let height = 0
 	let destroyed = false
+	let lightweight = false
 
 	const prefersReducedMotion = () =>
 		options.respectReducedMotion && !!mediaQuery?.matches
 
 	const shouldAnimate = () =>
-		!destroyed && !isPaused.value && !prefersReducedMotion()
+		!destroyed && !document.hidden && !isPaused.value && !prefersReducedMotion()
 
 	function createPetal(randomY = false): Petal {
 		const depth = random(0.45, 1)
-		const blur = depth > 0.92 ? random(1.5, 3) : 0
+		const blur = !lightweight && depth > 0.92 ? random(1.5, 3) : 0
 
 		return {
 			spriteIndex: Math.floor(random(0, petalSprites.length)),
@@ -118,33 +119,45 @@ export function usePetalAnimation(
 	}
 
 	function refreshTextures(): void {
-		tintedTextures.length = 0
-		if (!options.petalColor) return
-
-		for (const [index, source] of petalTextures.entries()) {
-			if (!source.naturalWidth) continue
-			const tinted = document.createElement('canvas')
-			tinted.width = source.naturalWidth
-			tinted.height = source.naturalHeight
-			const context = tinted.getContext('2d')
+		preparedSprites.length = 0
+		const dpr = Math.min(options.maxDpr, lightweight ? 1 : 2)
+		for (const [index, sprite] of petalSprites.entries()) {
+			const source = petalTextures[sprite.textureIndex]
+			if (!source?.naturalWidth) continue
+			const sourceWidth = sprite.width * source.naturalWidth
+			const sourceHeight = sprite.height * source.naturalHeight
+			const prepared = document.createElement('canvas')
+			prepared.width = Math.max(1, Math.min(Math.ceil(sourceWidth), Math.ceil(options.maxSize * 3 * dpr)))
+			prepared.height = Math.max(1, Math.round(prepared.width * sourceHeight / sourceWidth))
+			const context = prepared.getContext('2d')
 			if (!context) continue
-			context.filter = 'grayscale(1)'
-			context.drawImage(source, 0, 0)
-			context.filter = 'none'
-			context.globalCompositeOperation = 'multiply'
-			context.fillStyle = options.petalColor
-			context.fillRect(0, 0, tinted.width, tinted.height)
-			context.globalCompositeOperation = 'destination-in'
-			context.drawImage(source, 0, 0)
-			tintedTextures[index] = tinted
+			const drawSource = () => context.drawImage(
+				source,
+				sprite.x * source.naturalWidth,
+				sprite.y * source.naturalHeight,
+				sourceWidth,
+				sourceHeight,
+				0, 0, prepared.width, prepared.height,
+			)
+			context.filter = options.petalColor ? 'grayscale(1)' : 'none'
+			drawSource()
+			if (options.petalColor) {
+				context.filter = 'none'
+				context.globalCompositeOperation = 'multiply'
+				context.fillStyle = options.petalColor
+				context.fillRect(0, 0, prepared.width, prepared.height)
+				context.globalCompositeOperation = 'destination-in'
+				drawSource()
+			}
+			preparedSprites[index] = prepared
 		}
 	}
 
 	function drawPetal(petal: Petal): void {
 		const sprite = petalSprites[petal.spriteIndex]
 		const source = petalTextures[sprite.textureIndex]
-		if (!ctx || !source?.naturalWidth) return
-		const texture = tintedTextures[sprite.textureIndex] ?? source
+		const texture = preparedSprites[petal.spriteIndex]
+		if (!ctx || !source?.naturalWidth || !texture) return
 
 		ctx.save()
 		ctx.filter = petal.blur ? `blur(${petal.blur}px)` : 'none'
@@ -167,10 +180,6 @@ export function usePetalAnimation(
 		const petalHeight = petal.size * 2 * sourceHeight / sourceWidth
 		ctx.drawImage(
 			texture,
-			sprite.x * source.naturalWidth,
-			sprite.y * source.naturalHeight,
-			sourceWidth,
-			sourceHeight,
 			-petal.size,
 			-petalHeight / 2,
 			petal.size * 2,
@@ -192,7 +201,7 @@ export function usePetalAnimation(
 		const rect = container.value.getBoundingClientRect()
 		width = rect.width
 		height = rect.height
-		const dpr = Math.min(window.devicePixelRatio || 1, options.maxDpr)
+		const dpr = Math.min(window.devicePixelRatio || 1, options.maxDpr, lightweight ? 1 : 2)
 
 		canvas.value.width = Math.round(width * dpr)
 		canvas.value.height = Math.round(height * dpr)
@@ -201,7 +210,7 @@ export function usePetalAnimation(
 	}
 
 	function syncPetalCount(): void {
-		const count = Math.max(0, Math.floor(options.petalCount))
+		const count = Math.max(0, Math.min(Math.floor(options.petalCount), lightweight ? 16 : Infinity))
 		while (petals.length > count) petals.pop()
 		while (petals.length < count) petals.push(createPetal(true))
 		drawFrame()
@@ -214,7 +223,7 @@ export function usePetalAnimation(
 	}
 
 	function handlePointer(event: PointerEvent): void {
-		if (!event.isPrimary || !container.value || !shouldAnimate()) return
+		if (lightweight || !event.isPrimary || !container.value || !shouldAnimate()) return
 		if (event.pointerType !== 'mouse' && event.type === 'pointermove' && !pointer.active) return
 		if (event.target instanceof Element && event.target.closest('.petal-animation__controls')) return
 
@@ -268,7 +277,7 @@ export function usePetalAnimation(
 		pointer.velocityX *= pointerDecay
 		pointer.velocityY *= pointerDecay
 		for (const petal of petals) {
-			updateInteraction(petal, dt)
+			if (!lightweight) updateInteraction(petal, dt)
 			petal.phase += petal.swaySpeed * dt
 			petal.y += petal.speedY * (1 + Math.sin(petal.tumble) * 0.18) * dt
 			petal.x += (
@@ -293,6 +302,11 @@ export function usePetalAnimation(
 		if (!shouldAnimate()) {
 			lastTime = 0
 			drawFrame()
+			return
+		}
+
+		if (lightweight && lastTime && timestamp - lastTime < 1000 / 30) {
+			animationFrame = requestAnimationFrame(tick)
 			return
 		}
 
@@ -368,9 +382,14 @@ export function usePetalAnimation(
 		() => [options.minSize, options.maxSize, options.minSpeed, options.maxSpeed, options.wind, options.sway],
 		() => {
 			resetPetals()
+			refreshTextures()
 			drawFrame()
 		},
 	)
+	watch(() => options.maxDpr, () => {
+		refreshTextures()
+		resize()
+	})
 	watch(() => options.opacity, drawFrame)
 	watch(() => options.petalColor, () => {
 		refreshTextures()
@@ -379,6 +398,8 @@ export function usePetalAnimation(
 
 	onMounted(() => {
 		if (!canvas.value || !container.value) return
+		lightweight = window.matchMedia('(pointer: coarse)').matches
+			|| (navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 4)
 		ctx = canvas.value.getContext('2d', { alpha: true })
 		if (!ctx) return
 
@@ -416,7 +437,7 @@ export function usePetalAnimation(
 		stopLoop()
 		for (const texture of petalTextures) texture.onload = null
 		petalTextures.length = 0
-		tintedTextures.length = 0
+		preparedSprites.length = 0
 		observer?.disconnect()
 		document.removeEventListener('pointerdown', handlePointer, true)
 		document.removeEventListener('pointermove', handlePointer, true)

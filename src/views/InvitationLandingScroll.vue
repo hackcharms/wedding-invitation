@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { defineAsyncComponent, ref } from "vue";
 
 import EnvelopSutter from "@/components/wedding/EnvelopSutter.vue";
-import ScratchCard from "@/components/wedding/ScratchCard.vue";
 import CountdownTimer from "@/components/wedding/CountdownTimer.vue";
 import ProgramTimeline from "@/components/wedding/ProgramTimeline.vue";
 import AddToCalendar from "@/components/wedding/AddToCalendar.vue";
 import ThankyouCard from "@/components/wedding/ThankyouCard.vue";
 import GoldDivider from "@/components/ui/GoldDivider.vue";
 import BackgroundMusic from "@/components/wedding/BackgroundMusic.vue";
-import InvitationHeader from "@/components/wedding/InvitationHeader.vue";
-import EmblaCarousel from "@/components/wedding/EmblaCarousel.vue";
 import Labels from "@/config/labels.json";
 
 import { useCountdown } from "@/composables/useCountdown";
+
+const EmblaCarousel = defineAsyncComponent(() => import("@/components/wedding/EmblaCarousel.vue"));
+const InvitationHeader = defineAsyncComponent(() => import("@/components/wedding/InvitationHeader.vue"));
+const ScratchCard = defineAsyncComponent(() => import("@/components/wedding/ScratchCard.vue"));
 
 const appUnlocked = ref(false);
 const scratchRevealed = ref(false);

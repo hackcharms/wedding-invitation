@@ -179,7 +179,6 @@ onBeforeUnmount(() => {
 }
 
 .envelope-botanical-right {
-	width: 220in;
 	right: 0.75rem;
 	animation-delay: -2.4s;
 }

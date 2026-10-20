@@ -7,10 +7,38 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
   const scratchPercentage = ref<number>(0)
   const isFullyRevealed = ref<boolean>(false)
   let ctx: CanvasRenderingContext2D | null = null
+  let progressContext: CanvasRenderingContext2D | null = null
   let isDrawing = false
   let lastX = 0
   let lastY = 0
   let themeObserver: MutationObserver | undefined
+  let resizeObserver: ResizeObserver | undefined
+  let progressTimer: ReturnType<typeof setTimeout> | undefined
+
+  const updateProgress = (): void => {
+    if (progressTimer !== undefined) clearTimeout(progressTimer)
+    progressTimer = undefined
+    if (!ctx || !progressContext || isFullyRevealed.value) return
+
+    const sampleCanvas = progressContext.canvas
+    progressContext.clearRect(0, 0, sampleCanvas.width, sampleCanvas.height)
+    progressContext.drawImage(ctx.canvas, 0, 0, sampleCanvas.width, sampleCanvas.height)
+    const pixels = progressContext.getImageData(0, 0, sampleCanvas.width, sampleCanvas.height).data
+    let cleared = 0
+    let sampled = 0
+    for (let index = 3; index < pixels.length; index += 4) {
+      cleared += 1 - pixels[index]! / 255
+      sampled++
+    }
+
+    const currentPercent = sampled ? (cleared / sampled) * 100 : 0
+    scratchPercentage.value = Math.round(currentPercent)
+
+    if (currentPercent >= thresholdPercent) {
+      isFullyRevealed.value = true
+      onThresholdReached?.()
+    }
+  }
 
   const paintCoating = (preserveScratches = false): void => {
     if (!ctx) return
@@ -54,13 +82,39 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
   }
 
   const initCanvas = (canvasElement: HTMLCanvasElement, containerElement: HTMLElement): void => {
-    ctx = canvasElement.getContext('2d', { willReadFrequently: true })
+    ctx = canvasElement.getContext('2d')
     if (!ctx) return
 
-    const rect = containerElement.getBoundingClientRect()
-    canvasElement.width = rect.width
-    canvasElement.height = rect.height
-    paintCoating()
+    const sampleCanvas = document.createElement('canvas')
+    progressContext = sampleCanvas.getContext('2d', { willReadFrequently: true })
+    let initialized = false
+    const resizeCanvas = (): void => {
+      if (!ctx) return
+      const rect = containerElement.getBoundingClientRect()
+      const width = Math.max(1, Math.round(rect.width))
+      const height = Math.max(1, Math.round(rect.height))
+      if (initialized && canvasElement.width === width && canvasElement.height === height) return
+
+      stopScratching()
+      const coating = initialized ? document.createElement('canvas') : null
+      if (coating) {
+        coating.width = canvasElement.width
+        coating.height = canvasElement.height
+        coating.getContext('2d')?.drawImage(canvasElement, 0, 0)
+      }
+      canvasElement.width = width
+      canvasElement.height = height
+      if (coating) ctx.drawImage(coating, 0, 0, width, height)
+      const sampleScale = Math.min(1, 96 / Math.max(width, height))
+      sampleCanvas.width = Math.max(1, Math.round(width * sampleScale))
+      sampleCanvas.height = Math.max(1, Math.round(height * sampleScale))
+      paintCoating(!!coating)
+      initialized = true
+    }
+    resizeCanvas()
+    resizeObserver?.disconnect()
+    resizeObserver = new ResizeObserver(resizeCanvas)
+    resizeObserver.observe(containerElement)
 
     themeObserver?.disconnect()
     themeObserver = new MutationObserver(() => {
@@ -91,43 +145,31 @@ export function useScratchCanvas(options: ScratchOptions = {}) {
     ctx.lineJoin = 'round'
     ctx.lineCap = 'round'
     ctx.lineWidth = 36
-    ctx.filter = 'blur(4px)'
 
     ctx.beginPath()
     ctx.moveTo(lastX, lastY)
     ctx.lineTo(currentX, currentY)
-    ctx.stroke()
-    ctx.filter = 'none'
-    ctx.lineWidth = 24
     ctx.stroke()
     ctx.restore()
 
     lastX = currentX
     lastY = currentY
 
-    // Performance-optimized sampling calculation
-    const imgData = ctx.getImageData(0, 0, canvasElement.width, canvasElement.height)
-    const pixels = imgData.data
-    let cleared = 0
-    let sampled = 0
-    for (let index = 3; index < pixels.length; index += 16) {
-      cleared += 1 - pixels[index]! / 255
-      sampled++
-    }
-
-    const currentPercent = sampled ? (cleared / sampled) * 100 : 0
-    scratchPercentage.value = Math.round(currentPercent)
-
-    if (currentPercent >= thresholdPercent) {
-      isFullyRevealed.value = true
-      if (onThresholdReached) onThresholdReached()
+    if (progressTimer === undefined) {
+      progressTimer = setTimeout(updateProgress, 150)
     }
   }
 
-  const stopScratching = (): void => { isDrawing = false }
+  const stopScratching = (): void => {
+    isDrawing = false
+    if (progressTimer !== undefined) updateProgress()
+  }
 
   onBeforeUnmount(() => {
+    if (progressTimer !== undefined) clearTimeout(progressTimer)
     themeObserver?.disconnect()
+    resizeObserver?.disconnect()
+    progressContext = null
     ctx = null
   })
 

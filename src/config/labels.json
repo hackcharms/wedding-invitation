@@ -1,6 +1,14 @@
 {
     "groom": "Zubair Ahmad",
     "bride": "Ansari Shanno",
+    "groomParents": {
+        "father": "Habeeb Ahmad",
+        "mother": "Rahimunnisha"
+    },
+    "brideParents": {
+        "father": "Syeed Ansari",
+        "mother": "Anisha Khatoon"
+    },
     "venueName": "Green Lawn Wedding Hall",
     "venueAddress": "Kalsekar, Mumbra, Thane, Maharashtra 400612",
     "eventDateTimeUtc": "2026-12-14T12:30:00.000Z",
