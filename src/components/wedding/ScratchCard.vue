@@ -29,7 +29,7 @@ const {
   scratch,
   stopScratching
 } = useScratchCanvas({
-  thresholdPercent: 40,
+  thresholdPercent: 20,
   onThresholdReached: runCelebration
 })
 
